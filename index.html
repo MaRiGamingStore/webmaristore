@@ -93,7 +93,6 @@
             text-align: left;
         }
 
-        /* Form Styling */
         input, select { 
             background: #1c2128 !important; 
             border: 1px solid #30363d !important; 
@@ -102,7 +101,6 @@
             outline: none; 
         }
 
-        /* Banner Fix */
         .banner-step2-fixed { 
             width: 100%; 
             max-width: 800px; 
@@ -123,7 +121,6 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
         }
 
-        /* Notifikasi Toast */
         #toast { 
             visibility: hidden; 
             min-width: 280px; 
@@ -254,11 +251,14 @@
                                 <p class="text-[9px] font-black text-blue-500 uppercase mb-3 leading-none text-left">Login Akun Via:</p>
                                 <div id="loginOptions" class="grid grid-cols-3 gap-2"></div>
                             </div>
-                            <input type="text" id="uId" placeholder="User ID / Email Login..." class="w-full p-4 rounded-xl font-bold italic">
-                            <input type="password" id="uPass" placeholder="Password Akun..." class="w-full p-4 rounded-xl font-bold italic">
+                            <input type="text" id="uId" placeholder="User ID / Email Login..." class="w-full p-4 rounded-xl font-bold italic text-left">
+                            <input type="password" id="uPass" placeholder="Password Akun..." class="w-full p-4 rounded-xl font-bold italic text-left">
                             <div class="space-y-1">
-                                <input type="text" id="uWa" placeholder="Nomor WhatsApp Aktif..." class="w-full p-4 rounded-xl font-bold italic">
-                                <p class="text-[8px] text-gray-500 font-bold italic pl-2 leading-tight">*nomor ini untuk konfirmasi pesanan<br>*nomor ini untuk jika ada kendala</p>
+                                <input type="text" id="uWa" placeholder="Nomor WhatsApp Aktif..." class="w-full p-4 rounded-xl font-bold italic text-left">
+                                <p class="text-[8px] text-gray-500 font-bold italic pl-2 leading-tight text-left">
+                                    *nomor ini untuk konfirmasi pesanan<br>
+                                    *nomor ini untuk jika ada kendala
+                                </p>
                             </div>
                         </div>
 
@@ -272,8 +272,8 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="text-[9px] text-gray-500 font-bold uppercase italic mb-1 tracking-tighter">TOTAL BAYAR:</p>
-                                <p id="totalPrice" class="text-3xl font-black italic text-blue-500 leading-none">Rp 0</p>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase italic mb-1 tracking-tighter text-right">TOTAL BAYAR:</p>
+                                <p id="totalPrice" class="text-3xl font-black italic text-blue-500 leading-none text-right">Rp 0</p>
                             </div>
                             <button onclick="prosesCheckout()" class="w-full gaming-gradient py-6 rounded-3xl font-black italic tracking-widest shadow-xl hover:scale-105 transition uppercase">KONFIRMASI JOKI SEKARANG</button>
                         </div>
@@ -284,8 +284,8 @@
             <footer class="mt-20 border-t-4 border-blue-500 pt-10 pb-10 text-left">
                 <div class="flex flex-col md:flex-row justify-between gap-10">
                     <div class="max-w-md">
-                        <h3 class="text-blue-500 font-black italic mb-4 uppercase text-sm tracking-widest leading-none">MaRi Gaming Store</h3>
-                        <p class="text-[11px] text-gray-400 italic font-bold leading-relaxed">"MaRi Gaming Store, MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</p>
+                        <h3 class="text-blue-500 font-black italic mb-4 uppercase text-sm tracking-widest leading-none text-left">MaRi Gaming Store</h3>
+                        <p class="text-[11px] text-gray-400 italic font-bold leading-relaxed text-left">"MaRi Gaming Store, MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</p>
                         <div class="flex gap-4 mt-6">
                             <a href="https://www.tiktok.com/@mari.gaming.store" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-tiktok text-lg"></i></a>
                             <a href="https://www.instagram.com/marigamingstore/" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-instagram text-lg"></i></a>
@@ -305,12 +305,12 @@
         <div class="bg-[#161b22] p-10 rounded-[3rem] w-full max-w-sm border border-gray-800 shadow-2xl relative">
             <button onclick="closeModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
             <div id="payView">
-                <h3 class="font-black italic text-xl mb-4 text-blue-500 uppercase tracking-tighter">PEMBAYARAN</h3>
+                <h3 class="font-black italic text-xl mb-4 text-blue-500 uppercase tracking-tighter text-center">PEMBAYARAN</h3>
                 <div class="bg-gray-800/40 p-5 rounded-2xl mb-6 text-left border border-gray-700 text-left"><div id="bankDetail" class="font-black italic text-sm text-blue-400"></div></div>
                 <div id="qrisContainer" class="hidden mb-6"><img src="qris.png" class="mx-auto w-48 h-48 rounded-xl border border-white/10 p-2 bg-white"></div>
                 
                 <div class="mb-6">
-                    <label for="proofFile" class="file-upload-label text-center">
+                    <label for="proofFile" class="file-upload-label">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                         <span id="fileNameLabel" class="text-[9px] font-black uppercase">Upload Bukti Transfer</span>
                     </label>
@@ -320,9 +320,9 @@
             </div>
             <div id="successView" class="hidden">
                 <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)]"><i class="fa-solid fa-check text-4xl"></i></div>
-                <h3 class="font-black italic text-xl mb-2 text-white uppercase tracking-tighter text-center leading-none">ORDERAN MENDARAT!</h3>
+                <h3 class="font-black italic text-xl mb-2 text-white uppercase tracking-tighter text-center">ORDERAN MENDARAT!</h3>
                 <div id="invoiceBox" class="bg-black/30 p-4 rounded-2xl text-left border border-gray-800 text-[10px] font-mono text-blue-400 space-y-1 mb-8 whitespace-pre leading-tight overflow-x-auto text-left"></div>
-                <p class="text-[9px] text-gray-500 italic uppercase font-black mb-6 text-center leading-tight">Data login & laporan telah dikirim otomatis ke WhatsApp Admin Markas!</p>
+                <p class="text-[9px] text-gray-500 italic uppercase font-black mb-6 text-center leading-tight">Laporan telah dikirim otomatis ke WhatsApp Admin Markas!</p>
                 <button onclick="location.reload()" class="w-full bg-gray-800 py-4 rounded-2xl font-black italic uppercase border border-gray-700 hover:text-blue-500 transition tracking-widest">KEMBALI KE HOME</button>
             </div>
         </div>
@@ -333,14 +333,14 @@
             <button onclick="closeAuthModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
             <div id="loginForm" class="hidden space-y-5">
                 <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">LOGIN CHIEF</h3>
-                <input type="email" id="logEmail" placeholder="Email Akun..." class="w-full p-5 rounded-2xl font-bold italic">
-                <input type="password" id="logPass" placeholder="Password..." class="w-full p-5 rounded-2xl font-bold italic">
+                <input type="email" id="logEmail" placeholder="Email Akun..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <input type="password" id="logPass" placeholder="Password..." class="w-full p-5 rounded-2xl font-bold italic text-left">
                 <button onclick="handleAuth('login')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">MASUK MARKAS</button>
             </div>
             <div id="registerForm" class="hidden space-y-5">
                 <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">DAFTAR AKUN</h3>
-                <input type="email" id="regEmail" placeholder="Email Baru..." class="w-full p-5 rounded-2xl font-bold italic">
-                <input type="password" id="regPass" placeholder="Password Baru..." class="w-full p-5 rounded-2xl font-bold italic">
+                <input type="email" id="regEmail" placeholder="Email Baru..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <input type="password" id="regPass" placeholder="Password Baru..." class="w-full p-5 rounded-2xl font-bold italic text-left">
                 <button onclick="handleAuth('register')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">GABUNG SEKARANG</button>
             </div>
         </div>
@@ -390,20 +390,28 @@
         
         const gameData = {
             mlbb: { banner: "ml_logo.png", pkgs: [
-                { n: "Joki Master (Per ⭐)", p: 2000, d: "Layanan rank Master cepat. Winrate aman Chief. Pool luas." },
-                { n: "Joki Grandmaster (Per ⭐)", p: 3000, d: "Beresin GM tanpa keki. Cocok buat naik ke Epic." },
-                { n: "Joki Epic (Per ⭐)", p: 5000, d: "Layanan joki tier badak secepat kilat. Pro only." },
-                { n: "Joki Legend (Per ⭐)", p: 7000, d: "Otw Mythic lancar jaya. Hero menyesuaikan meta." },
+                { n: "Joki Master (Per ⭐)", p: 2000, d: "Layanan pengerjaan rank Master cepat. Winrate aman Chief. Hero pool luas." },
+                { n: "Joki Grandmaster (Per ⭐)", p: 3000, d: "Beresin rank GM tanpa keki. Cocok buat naik ke Epic." },
+                { n: "Joki Epic (Per ⭐)", p: 5000, d: "Layanan joki tier badak secepat kilat. Pro joki only." },
+                { n: "Joki Legend (Per ⭐)", p: 7000, d: "Otw Mythic lancar jaya. Hero pool luas menyesuaikan meta terbaru." },
                 { n: "Joki Mythic (Per ⭐)", p: 15000, d: "Rank kasta tinggi pengerjaan elit tervalidasi." }
             ], logins: ["MOONTON", "GOOGLE", "FB"]},
             endfield: { banner: "endfield_logo.png", pkgs: [
-                { n: "Tier 1 (Rafinasi)", p: 5000, d: "Khusus setting 1 jenis produksi (Rafinasi). Bukan 1 base utuh.", type: 'base' },
-                { n: "Tier 2 (Conveyor)", p: 10000, d: "Jalur conveyor otomatis sederhana untuk 1 jenis material.", type: 'base' },
-                { n: "Tier 3 (Optimization)", p: 35000, d: "Re-layout total jalur produksi berantakan agar lancar.", type: 'base' },
-                { n: "Tier End (God Tier)", p: 100000, d: "Setting 6 Jalur maksimal. Produksi super cepat & efisien 100%.", type: 'base' },
-                { n: "The Hub Map (Sultan)", p: 1377000, d: "Full Service eksplorasi map The Hub secara menyeluruh 100%." },
-                { n: "Valley IV (Sultan)", p: 1836000, d: "Full Progress area Valley IV standar pengerjaan tinggi." },
-                { n: "End-Game Integration", p: 2500000, d: "Setup base end-game Sultan. Integrasi sistem otomatis total." }
+                { n: "Tier 1 (Rafinasi)", p: 5000, d: "Setting 1 jenis produksi material awal (Rafinasi). Bukan 1 base utuh Chief.", type: 'base' },
+                { n: "Tier 2 (Conveyor)", p: 10000, d: "Pembuatan jalur conveyor belt otomatis sederhana untuk 1 jenis material dasar.", type: 'base' },
+                { n: "Tier 3 (Optimization)", p: 35000, d: "Re-layout total jalur produksi yang berantakan agar workflow lancar.", type: 'base' },
+                { n: "Tier 4 (Professional)", p: 50000, d: "Pemasangan jalur logistik otomatis skala menengah.", type: 'base' },
+                { n: "Tier End (God Tier)", p: 100000, d: "Setting 6 Jalur Logistik maksimal. Produksi super cepat & efisiensi 100%.", type: 'base' },
+                { n: "Per Chapter (Story)", p: 20000, d: "Clear misi utama per chapter pilihan Chief." },
+                { n: "Paket Story (Ch 1-3)", p: 120000, d: "Akselerasi story awal sampai tamat Chapter 3. Progres cepat tanpa keki." },
+                { n: "Full Map Exploration", p: 125000, d: "Unlock Kabut, Beacon, & Teleport di area yang tersedia agar akses Chief lancar." },
+                { n: "Daily Farm (7 Hari)", p: 80000, d: "Jasa harian selama 7 hari (Login, Clear Daily, dan kuras habis Stamina rutin)." },
+                { n: "Starter Siap Tempur", p: 300000, d: "Story Ch 1-3 Tamat + Full Map Dasar Terbuka + Base Tier 2. Chief tinggal main elit." },
+                { n: "Pro-Farmer Setup", p: 500000, d: "Story Ch 1-5 Tamat + Full Map Exploration + Base Tier 4. Setup pabrik kompleks siap tempur." },
+                { n: "Akun Elit (End-Game)", p: 850000, d: "Full Story & Map + Setup Tower 6 Jalur + Bonus Maintenance Gratis 1 bulan." },
+                { n: "The Hub Map (Sultan)", p: 1377000, d: "Full Service eksplorasi map The Hub secara menyeluruh skala internasional. Clear 100%." },
+                { n: "Valley IV (Sultan)", p: 1836000, d: "Full Progress khusus area Valley IV dengan standar pengerjaan tinggi sampai tuntas." },
+                { n: "End-Game Integration", p: 2500000, d: "Setup base end-game paling kompleks Sultan. Integrasi sistem otomatis total." }
             ], logins: ["GOOGLE", "GRYPHLINE", "EMAIL"]}
         };
 
@@ -440,8 +448,8 @@
                 label.innerText = "BUKTI SIAP: " + input.files[0].name.substring(0, 15) + "...";
                 btn.disabled = false;
                 btn.innerText = "SAYA SUDAH BAYAR";
-                btn.classList.replace('bg-gray-700', 'gaming-gradient');
-                btn.classList.replace('text-gray-500', 'text-white');
+                btn.classList.add('gaming-gradient');
+                btn.style.color = "white";
                 btn.style.cursor = "pointer";
             }
         }
@@ -464,7 +472,7 @@
             const base = document.getElementById('baseName').value || '-';
             const aic = document.getElementById('lvlAIC').value || '-';
 
-            // FORMAT PESAN BOT (TERINTEGRASI TOKEN)
+            // FORMAT PESAN BOT
             let msg = `*ORDERAN JOKI BARU - MaRi STORE*\n\n`;
             msg += `*ID Transaksi:* ${globalTrk}\n`;
             msg += `*Game:* ${curG.toUpperCase()}\n`;
@@ -482,7 +490,7 @@
                 msg += `*Explo/Otoritas:* ${explo}/${otor}\n`;
                 msg += `*Base/AIC:* ${base} (${aic})\n\n`;
             }
-            msg += `_MaRi Gaming Store_`;
+            msg += `_MaRi Gaming Store - Akun Jadi Elit, Lu Tinggal Ngupi_`;
 
             // EKSEKUSI API FONNTE (TOKEN TERPASANG)
             try {
