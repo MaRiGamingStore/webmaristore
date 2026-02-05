@@ -3,309 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaRi Gaming Store | Joki Elit & Aman</title>
+    <title>MaRi Gaming Store | Akun Jadi Elit, Lu Tinggal Ngupi</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root {
-            --neon: #00ff00;
-            --dark-bg: #050505;
-            --card-bg: #111111;
-            --text-gray: #aaaaaa;
-            --white: #ffffff;
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0b0e14; 
+            color: #e2e8f0; 
+            overflow-x: hidden; 
+            font-size: 12px; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        /* Sidebar Gahar */
+        .sidebar { 
+            background: #161b22; 
+            border-right: 1px solid #30363d; 
+            height: 100vh; 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            width: 230px; 
+            z-index: 50; 
+            display: flex; 
+            flex-direction: column; 
         }
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--white);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+        .main-content { 
+            margin-left: 230px; 
+            padding: 1.5rem; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        @media (max-width: 768px) { 
+            .sidebar { display: none; } 
+            .main-content { margin-left: 0; padding: 1rem; } 
         }
 
-        /* HEADER SECTION */
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            border: 2px solid var(--neon);
-            border-radius: 25px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
-            background: linear-gradient(145deg, #0a0a0a, #111);
-            margin-bottom: 50px;
+        /* Card System */
+        .glass-card { 
+            background: #161b22; 
+            border: 1px solid #30363d; 
+            transition: 0.3s; 
+            cursor: pointer; 
+            border-radius: 1.2rem; 
         }
 
-        h1 {
-            color: var(--neon);
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin: 0;
-            font-size: clamp(24px, 6vw, 40px);
-            text-shadow: 0 0 15px var(--neon);
+        .glass-card:hover { 
+            border-color: #3b82f6; 
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); 
         }
 
-        .slogan {
-            display: block;
-            margin-top: 15px;
-            font-style: italic;
-            color: var(--text-gray);
-            font-size: clamp(12px, 3vw, 16px);
+        .selected-item { 
+            border-color: #3b82f6 !important; 
+            background: rgba(59, 130, 246, 0.1) !important; 
         }
 
-        /* SECTION TITLES */
-        .section-title {
+        .gaming-gradient { 
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); 
+        }
+
+        .desc-inline { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: 0.5s ease-out; 
+        }
+
+        .selected-item .desc-inline { 
+            max-height: 800px; 
+            margin-top: 10px; 
+            border-top: 1px solid rgba(59, 130, 246, 0.2); 
+            padding-top: 8px; 
+        }
+
+        .desc-text { 
+            font-size: 11px !important; 
+            line-height: 1.6 !important; 
+            font-weight: 600 !important; 
+            color: #cbd5e1 !important; 
+            text-align: left;
+        }
+
+        /* Form Styling */
+        input, select { 
+            background: #1c2128 !important; 
+            border: 1px solid #30363d !important; 
+            color: white !important; 
+            font-size: 11px !important; 
+            outline: none; 
+        }
+
+        /* Banner Step 2 Fix - Ukuran Proporsional */
+        .banner-step2-fixed { 
+            width: 100%; 
+            max-width: 800px; 
+            height: 220px; 
+            border-radius: 2rem; 
+            border: 1px solid #30363d; 
+            object-fit: cover; 
+            margin: 0 auto 2rem auto; 
+            display: block; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .banner-store { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 2rem; 
+            border: 1px solid #30363d; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+        }
+
+        /* Notifikasi Toast */
+        #toast { 
+            visibility: hidden; 
+            min-width: 280px; 
+            background: #161b22; 
+            border: 1px solid #3b82f6; 
+            color: #fff; 
+            text-align: left; 
+            border-radius: 1rem; 
+            padding: 16px; 
+            position: fixed; 
+            z-index: 1000; 
+            right: 20px; 
+            top: 20px; 
+            font-weight: 600; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+
+        #toast.show { 
+            visibility: visible; 
+            animation: slideIn 0.5s, slideOut 0.5s 2.5s; 
+        }
+
+        /* Bukti Bayar Styling */
+        .file-upload-label {
             display: flex;
             align-items: center;
-            margin: 40px 0 20px;
-            color: var(--neon);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            font-size: 1.4em;
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon), transparent);
-            margin-left: 20px;
-        }
-
-        /* MLBB GRID */
-        .grid-mlbb {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .card-price {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #222;
+            justify-content: center;
+            gap: 10px;
+            background: #1c2128;
+            border: 2px dashed #30363d;
+            padding: 15px;
+            border-radius: 1rem;
+            cursor: pointer;
             transition: 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .card-price:hover {
-            border-color: var(--neon);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.1);
-        }
-
-        .card-price b {
-            color: var(--text-gray);
-            font-size: 0.9em;
-            text-transform: uppercase;
-        }
-
-        .card-price span {
-            color: var(--neon);
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        /* ENDFIELD CARDS */
-        .endfield-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card-detail {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid var(--neon);
-            border-right: 1px solid #222;
-            border-top: 1px solid #222;
-            border-bottom: 1px solid #222;
-            position: relative;
-        }
-
-        .card-detail h3 {
-            margin: 0 0 10px 0;
-            color: var(--neon);
-            font-size: 1.2em;
-            text-transform: uppercase;
-        }
-
-        .card-detail .price-tag {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            background: var(--neon);
-            color: black;
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-
-        .card-detail p {
-            margin: 5px 0;
-            color: var(--text-gray);
-            font-size: 0.95em;
-        }
-
-        .card-detail i {
-            color: #777;
-            font-size: 0.85em;
-            display: block;
-            margin-top: 10px;
-        }
-
-        /* FORMAT & ORDER */
-        .format-section {
-            background: #000;
-            border: 1px dashed var(--neon);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
-        }
-
-        .format-code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            color: var(--neon);
-            white-space: pre-wrap;
-        }
-
-        .btn-order {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 50px auto 0;
-            background: var(--neon);
-            color: black;
-            text-align: center;
-            padding: 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: 0.4s;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-        }
-
-        .btn-order:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px var(--neon);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 80px;
-            padding-bottom: 40px;
-            color: #444;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .card-detail .price-tag {
-                position: static;
-                display: inline-block;
-                margin-bottom: 15px;
-            }
-            .grid-mlbb {
-                grid-template-columns: 1fr;
-            }
-        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>MaRi Gaming Store 🎮</h1>
-            <span class="slogan">"MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</span>
-        </header>
+    <div id="toast">Notifikasi MaRI Store</div>
 
-        <div class="section-title">🎮 Joki MLBB (Per Bintang)</div>
-        <div class="grid-mlbb">
-            <div class="card-price"><b>Master</b><span>3k</span></div>
-            <div class="card-price"><b>Grandmaster</b><span>4k</span></div>
-            <div class="card-price"><b>Epic</b><span>5k</span></div>
-            <div class="card-price"><b>Legend</b><span>8k</span></div>
-            <div class="card-price"><b>Mythic (0-25)</b><span>12k</span></div>
-            <div class="card-price"><b>M. Honor (25-50)</b><span>15k</span></div>
-            <div class="card-price"><b>M. Glory (50-100)</b><span>22k</span></div>
-            <div class="card-price"><b>M. Immortal (100+)</b><span>35k++</span></div>
+    <aside class="sidebar p-5 hidden md:flex text-left">
+        <div class="mb-4 flex items-center gap-3">
+            <img src="logo.png" class="w-8 h-8 rounded-lg border border-blue-500 shadow-lg object-cover">
+            <h1 class="text-[10px] font-black italic text-blue-500 uppercase tracking-tighter leading-tight">MaRi Gaming Store</h1>
+        </div>
+        
+        <div id="userProfile" class="mb-6 p-4 bg-blue-600/5 border border-blue-500/20 rounded-2xl hidden">
+            <p class="text-[8px] font-black text-blue-500 uppercase mb-1">WELCOME BACK CHIEF,</p>
+            <p id="profileName" class="text-[10px] font-bold text-white italic uppercase truncate">USER</p>
+            <button onclick="logout()" class="mt-2 text-[8px] text-red-500 font-bold uppercase hover:underline">Logout</button>
+        </div>
+        
+        <div id="authButtons" class="mb-6 space-y-2">
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="openAuthModal('login')" class="p-2 bg-gray-800 border border-gray-700 rounded-xl text-[9px] font-black uppercase hover:border-blue-500 transition">Login</button>
+                <button onclick="openAuthModal('register')" class="p-2 gaming-gradient rounded-xl text-[9px] font-black uppercase shadow-lg">Daftar</button>
+            </div>
+            <button onclick="loginGoogle()" class="w-full p-2 bg-white text-black rounded-xl text-[9px] font-black uppercase flex items-center justify-center gap-2">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-3"> Login Google
+            </button>
         </div>
 
-        <div class="section-title">🏗️ Endfield (Base & Logistik)</div>
-        <div class="endfield-container">
-            <div class="card-detail">
-                <div class="price-tag">10k / Pabrik</div>
-                <h3>🟢 Tier 1 (Rafinasi)</h3>
-                <p>Setting 1 jenis produksi awal. Bukan 1 base utuh!</p>
-                <i>Paket 5 Pabrik: 40k</i>
-            </div>
-            <div class="card-detail">
-                <div class="price-tag">15k / Jalur</div>
-                <h3>🟡 Tier 2 (Conveyor)</h3>
-                <p>Jalur otomatis sederhana per jenis material dasar.</p>
-                <i>Paket 5 Jalur: 60k</i>
-            </div>
-            <div class="card-detail">
-                <div class="price-tag">45k</div>
-                <h3>🟠 Tier 3 (Optimization)</h3>
-                <p>Re-layout total jalur produksi yang berantakan atau stuck.</p>
-            </div>
-            <div class="card-detail">
-                <div class="price-tag">85k</div>
-                <h3>🔴 Tier 4 (Professional)</h3>
-                <p>Pemasangan jalur logistik otomatis skala menengah (2-3 area).</p>
-            </div>
-            <div class="card-detail">
-                <div class="price-tag">175k</div>
-                <h3>⭐ Tier End (God Tier)</h3>
-                <p>Setting 6 Jalur Logistik Maksimal (Vertikal/Horizontal). Efisiensi 100%.</p>
-            </div>
+        <div class="bg-blue-600/5 border border-blue-500/20 p-3 rounded-2xl mb-4">
+            <p class="text-[8px] font-black text-blue-500 uppercase mb-1">Server Status:</p>
+            <p class="text-[10px] font-bold text-green-500 italic uppercase">● ONLINE & FAST RESPONSE</p>
         </div>
 
-        <div class="section-title">🗺️ Story, Map & Farming</div>
-        <div class="grid-mlbb">
-            <div class="card-price"><b>Story Per Chapter</b><span>20k</span></div>
-            <div class="card-price"><b>Paket Story (1-3)</b><span>55k</span></div>
-            <div class="card-price"><b>Full Exploration</b><span>125k</span></div>
-            <div class="card-price"><b>Resource Farm</b><span>20k</span></div>
-            <div class="card-price"><b>Daily (7 Hari)</b><span>75k</span></div>
-            <div class="card-price"><b>Monthly VIP</b><span>300k</span></div>
+        <div class="grid grid-cols-2 gap-2 mb-6">
+            <a href="https://www.tiktok.com/@mari.gaming.store" target="_blank" class="flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl hover:border-blue-500 transition">
+                <i class="fa-brands fa-tiktok text-white"></i>
+            </a>
+            <a href="https://www.instagram.com/marigamingstore/" target="_blank" class="flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl hover:border-blue-500 transition">
+                <i class="fa-brands fa-instagram text-white"></i>
+            </a>
         </div>
 
-        <div class="section-title">📝 Format Order</div>
-        <div class="format-section">
-            <div class="format-code">Game: 
-Layanan/Tier: 
-Login Via: 
-Email/ID: 
-Pass: 
-Metode Pembayaran: (Dana / Gopay / QRIS)</div>
+        <nav class="mt-auto space-y-1 font-bold italic text-[11px] text-gray-400 border-t border-gray-800 pt-4">
+            <a href="#" onclick="location.reload()" class="flex items-center gap-3 p-3 rounded-xl hover:text-blue-500 transition"><i class="fa-solid fa-house"></i> HOME</a>
+            <a href="#" onclick="window.open('https://wa.me/0895320302320')" class="flex items-center gap-3 p-3 rounded-xl hover:text-blue-500 transition"><i class="fa-solid fa-headset"></i> KONSULTASI ADMIN</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="max-w-[900px] mx-auto w-full">
+            
+            <img src="banner.png" class="banner-store shadow-2xl mb-10">
+
+            <div id="step1" class="page-step active text-center">
+                <h2 class="text-xs font-black italic text-blue-500 mb-8 tracking-widest uppercase">/ 01. PILIH GAME</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+                    <div onclick="goToStep2('mlbb')" class="group cursor-pointer w-fit mx-auto">
+                        <img src="ml_logo.png" class="w-[229px] h-[124px] object-cover rounded-2xl border border-gray-700 group-hover:border-blue-500 transition shadow-xl mb-4">
+                        <p class="font-black italic text-sm uppercase group-hover:text-blue-500 transition">MOBILE LEGENDS</p>
+                    </div>
+                    <div onclick="goToStep2('endfield')" class="group cursor-pointer w-fit mx-auto">
+                        <img src="endfield_logo.png" class="w-[229px] h-[124px] object-cover rounded-2xl border border-gray-700 group-hover:border-blue-500 transition shadow-xl mb-4">
+                        <p class="font-black italic text-sm uppercase group-hover:text-blue-500 transition">ARKNIGHTS: ENDFIELD</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step2" class="page-step hidden text-left">
+                <button onclick="backToStep1()" class="text-blue-500 font-bold text-[9px] uppercase italic mb-6 inline-block hover:underline"><i class="fa-solid fa-arrow-left mr-1"></i> KEMBALI</button>
+                <img id="gameBannerTop" src="" class="banner-step2-fixed shadow-2xl">
+                <h2 class="text-xs font-black italic text-blue-500 mb-6 tracking-widest uppercase">/ 02. PILIH LAYANAN</h2>
+                <div id="pkgGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-10"></div>
+                
+                <div id="formData" class="hidden">
+                    <div class="mt-10 mb-10 border-b-4 border-blue-500 opacity-50"></div>
+                    <h2 class="text-xs font-black italic text-blue-500 mb-6 tracking-widest uppercase">/ 03. DATA LOGIN & PEMBAYARAN</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div id="endfieldExtras" class="hidden grid grid-cols-2 gap-3">
+                                <input type="text" id="lvlExplo" placeholder="Lvl Eksplorasi..." class="p-4 rounded-xl font-bold italic">
+                                <input type="text" id="lvlOto" placeholder="Lvl Otoritas..." class="p-4 rounded-xl font-bold italic">
+                            </div>
+                            <div id="baseExtras" class="hidden space-y-3">
+                                <input type="text" id="baseName" placeholder="Nama Base (cth: Base Utama AIC)..." class="w-full p-4 rounded-xl font-bold italic">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" id="lvlAIC" placeholder="Lvl AIC Inti..." class="p-4 rounded-xl font-bold italic">
+                                    <input type="text" id="lvlBus" placeholder="Lvl Bus Depot..." class="p-4 rounded-xl font-bold italic">
+                                </div>
+                            </div>
+                            <div class="p-4 bg-gray-800/30 rounded-2xl border border-gray-700">
+                                <p class="text-[9px] font-black text-blue-500 uppercase mb-3 leading-none text-left">Login Akun Via:</p>
+                                <div id="loginOptions" class="grid grid-cols-3 gap-2"></div>
+                            </div>
+                            <input type="text" id="uId" placeholder="User ID / Email Login..." class="w-full p-4 rounded-xl font-bold italic text-left">
+                            <input type="password" id="uPass" placeholder="Password Akun..." class="w-full p-4 rounded-xl font-bold italic text-left">
+                            <div class="space-y-1">
+                                <input type="text" id="uWa" placeholder="Nomor WhatsApp Aktif..." class="w-full p-4 rounded-xl font-bold italic text-left">
+                                <p class="text-[8px] text-gray-500 font-bold italic pl-2 leading-tight text-left">
+                                    *nomor ini untuk konfirmasi pesanan<br>
+                                    *nomor ini untuk jika ada kendala
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6 text-left">
+                            <div class="p-4 bg-gray-800/30 rounded-2xl border border-gray-700">
+                                <p class="text-[9px] font-black text-blue-500 uppercase mb-3 tracking-widest leading-none text-left">METODE PEMBAYARAN:</p>
+                                <div class="grid grid-cols-3 gap-2 text-[9px] font-black uppercase text-left">
+                                    <div onclick="setPay(this, 'QRIS')" class="pay-opt glass-card p-3 rounded-xl text-center">QRIS</div>
+                                    <div onclick="setPay(this, 'DANA')" class="pay-opt glass-card p-3 rounded-xl text-center">DANA</div>
+                                    <div onclick="setPay(this, 'OVO')" class="pay-opt glass-card p-3 rounded-xl text-center">OVO</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[9px] text-gray-500 font-bold uppercase italic mb-1 tracking-tighter text-right">TOTAL BAYAR:</p>
+                                <p id="totalPrice" class="text-3xl font-black italic text-blue-500 leading-none text-right">Rp 0</p>
+                            </div>
+                            <button onclick="prosesCheckout()" class="w-full gaming-gradient py-6 rounded-3xl font-black italic tracking-widest shadow-xl hover:scale-105 transition uppercase">KONFIRMASI JOKI SEKARANG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-20 border-t-4 border-blue-500 pt-10 pb-10 text-left">
+                <div class="flex flex-col md:flex-row justify-between gap-10">
+                    <div class="max-w-md text-left">
+                        <h3 class="text-blue-500 font-black italic mb-4 uppercase text-sm tracking-widest leading-none text-left">MaRi Gaming Store</h3>
+                        <p class="text-[11px] text-gray-400 italic font-bold leading-relaxed text-left">"MaRi Gaming Store, MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</p>
+                        <div class="flex gap-4 mt-6">
+                            <a href="https://www.tiktok.com/@mari.gaming.store" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-tiktok text-lg"></i></a>
+                            <a href="https://www.instagram.com/marigamingstore/" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-[10px] mb-4 uppercase border-b border-gray-800 pb-2 text-left">Support</h4>
+                        <p onclick="window.open('https://wa.me/0895320302320')" class="text-[10px] text-gray-500 font-bold italic cursor-pointer hover:text-blue-500 transition text-left">Konsultasi Admin</p>
+                    </div>
+                </div>
+                <p class="text-center text-[9px] text-gray-700 font-black uppercase italic tracking-widest mt-10">&copy; 2026 MaRi Gaming Store. All Rights Reserved.</p>
+            </footer>
         </div>
+    </main>
 
-        <a href="https://wa.me/62895320302320?text=halo" class="btn-order">Pesan via Bot WA</a>
-
-        <footer>
-            &copy; 2026 MaRi Gaming Store - Admin Ridwan & Mala
-        </footer>
+    <div id="modalPay" class="fixed inset-0 bg-[#0d1117]/98 hidden flex items-center justify-center p-6 z-[200] backdrop-blur-2xl overflow-y-auto text-center">
+        <div class="bg-[#161b22] p-10 rounded-[3rem] w-full max-w-sm border border-gray-800 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <div id="payView">
+                <h3 class="font-black italic text-xl mb-4 text-blue-500 uppercase tracking-tighter text-center">PEMBAYARAN</h3>
+                <div class="bg-gray-800/40 p-5 rounded-2xl mb-6 text-left border border-gray-700 text-left"><div id="bankDetail" class="font-black italic text-sm text-blue-400"></div></div>
+                <div id="qrisContainer" class="hidden mb-6"><img src="qris.png" class="mx-auto w-48 h-48 rounded-xl border border-white/10 p-2 bg-white"></div>
+                
+                <div class="mb-6">
+                    <label for="proofFile" class="file-upload-label text-center">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span id="fileNameLabel" class="text-[9px] font-black uppercase">Upload Bukti Transfer</span>
+                    </label>
+                    <input type="file" id="proofFile" class="hidden" accept="image/*" onchange="validateProof(this)">
+                </div>
+                <button onclick="kirimOrderKeServer()" id="btnSubmitOrder" class="w-full bg-gray-700 text-gray-500 py-4 rounded-2xl font-black italic uppercase tracking-widest cursor-not-allowed" disabled>UPLOAD BUKTI DULU</button>
+            </div>
+            <div id="successView" class="hidden">
+                <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)]"><i class="fa-solid fa-check text-4xl"></i></div>
+                <h3 class="font-black italic text-xl mb-2 text-white uppercase tracking-tighter text-center leading-none">ORDERAN MENDARAT!</h3>
+                <div id="invoiceBox" class="bg-black/30 p-4 rounded-2xl text-left border border-gray-800 text-[10px] font-mono text-blue-400 space-y-1 mb-8 whitespace-pre leading-tight overflow-x-auto text-left"></div>
+                <button onclick="location.reload()" class="w-full bg-gray-800 py-4 rounded-2xl font-black italic uppercase border border-gray-700 hover:text-blue-500 transition tracking-widest text-center">KEMBALI KE HOME</button>
+            </div>
+        </div>
     </div>
 
+    <div id="modalAuth" class="fixed inset-0 bg-[#0d1117]/98 hidden flex items-center justify-center p-6 z-[250] backdrop-blur-2xl text-center">
+        <div class="bg-[#161b22] p-10 rounded-[3rem] w-full max-w-sm border border-gray-800 relative shadow-2xl">
+            <button onclick="closeAuthModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <div id="loginForm" class="hidden space-y-5">
+                <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">LOGIN CHIEF</h3>
+                <input type="email" id="logEmail" placeholder="Email Akun..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <input type="password" id="logPass" placeholder="Password..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <button onclick="handleAuth('login')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">MASUK MARKAS</button>
+            </div>
+            <div id="registerForm" class="hidden space-y-5">
+                <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">DAFTAR AKUN</h3>
+                <input type="email" id="regEmail" placeholder="Email Baru..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <input type="password" id="regPass" placeholder="Password Baru..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <button onclick="handleAuth('register')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">GABUNG SEKARANG</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = { apiKey: "AIzaSyCIJcB6vjFyA-0-s8CmMYp_92CjsRy5Un0", authDomain: "mari-gaming-store.firebaseapp.com", projectId: "mari-gaming-store", storageBucket: "mari-gaming-store.firebasestorage.app", messagingSenderId: "603917576692", appId: "1:603917576692:web:17b748327b4377f5d831a1", measurementId: "G-6PWBTZ414Z" };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        window.notify = (msg, color = "#1d4ed8") => {
+            const t = document.getElementById("toast");
+            t.style.borderLeft = `5px solid ${color}`; t.innerText = msg; t.classList.add("show");
+            setTimeout(() => t.classList.remove("show"), 3000);
+        };
+
+        window.loginGoogle = async () => { try { await signInWithPopup(auth, provider); notify("Login Sukses!", "#22c55e"); } catch(e) { notify("Error Login!"); } };
+        window.handleAuth = async (type) => {
+            const email = type === 'register' ? document.getElementById('regEmail').value : document.getElementById('logEmail').value;
+            const pass = type === 'register' ? document.getElementById('regPass').value : document.getElementById('logPass').value;
+            try {
+                if (type === 'register') await createUserWithEmailAndPassword(auth, email, pass);
+                else await signInWithEmailAndPassword(auth, email, pass);
+                notify("Sukses Chief!", "#22c55e"); closeAuthModal();
+            } catch (error) { notify("Email/Pass Salah!", "#ef4444"); }
+        };
+
+        window.logout = () => signOut(auth);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('authButtons').classList.add('hidden');
+                document.getElementById('userProfile').classList.remove('hidden');
+                document.getElementById('profileName').innerText = (user.displayName || user.email).toUpperCase();
+            } else {
+                document.getElementById('authButtons').classList.remove('hidden');
+                document.getElementById('userProfile').classList.add('hidden');
+            }
+        });
+    </script>
+
+    <script>
+        const paymentAccounts = { 'QRIS': 'SCAN KODE QR DI BAWAH CHIEF!', 'DANA': 'DANA: 0895-3203-02320 (A/N RIDWAN)', 'OVO': 'OVO: 0851-5690-6427 (A/N RIDWAN)' };
+        
+        const gameData = {
+            mlbb: { 
+                banner: "ml_logo.png", 
+                pkgs: [
+                    { n: "Joki Master (Per ⭐)", p: 2000, d: "Layanan pengerjaan cepat rank Master. Winrate aman Chief. Hero meta pool luas." },
+                    { n: "Joki Grandmaster (Per ⭐)", p: 3000, d: "Beresin rank GM tanpa keki. Cocok buat naik ke Epic dengan winrate manis." },
+                    { n: "Joki Epic (Per ⭐)", p: 5000, d: "Layanan joki tier badak. Pengerjaan secepat kilat oleh joki professional." },
+                    { n: "Joki Legend (Per ⭐)", p: 7000, d: "Otw Mythic lancar jaya. Hero pool luas menyesuaikan meta terbaru." },
+                    { n: "Joki Mythic (Per ⭐)", p: 15000, d: "Rank kasta tinggi pengerjaan elit tervalidasi." }
+                ], 
+                logins: ["MOONTON", "GOOGLE", "FB"]
+            },
+            endfield: { 
+                banner: "endfield_logo.png", 
+                pkgs: [
+                    { n: "Tier 1 (Rafinasi)", p: 5000, d: "Khusus setting 1 jenis produksi material awal (Rafinasi). Contoh: Bijih Ametis jadi Serat Ametis. Bukan 1 base utuh Chief.", type: 'base' },
+                    { n: "Tier 2 (Conveyor)", p: 10000, d: "Pembuatan jalur conveyor belt otomatis sederhana untuk 1 jenis material dasar produksi.", type: 'base' },
+                    { n: "Tier 3 (Optimization)", p: 35000, d: "Re-layout total jalur produksi yang sudah berantakan. Workflow produksi lancar tanpa stuck.", type: 'base' },
+                    { n: "Tier 4 (Professional)", p: 50000, d: "Pemasangan jalur logistik otomatis skala menengah. Mengintegrasikan 2-3 area produksi sekaligus.", type: 'base' },
+                    { n: "Tier End (God Tier)", p: 100000, d: "Setting 6 Jalur Logistik Vertikal/Horizontal maksimal. Produksi super cepat & efisiensi 100%.", type: 'base' },
+                    { n: "Per Chapter (Story)", p: 20000, d: "Clear misi utama per chapter pilihan Chief. Harga menyesuaikan tingkat kesulitan misi." },
+                    { n: "Paket Story (Ch 1-3)", p: 120000, d: "Akselerasi story awal sampai tamat Chapter 3. Progres cepat tanpa keki." },
+                    { n: "Full Map Exploration", p: 125000, d: "Unlock Kabut, Beacon, & Teleport di area yang tersedia agar akses Chief lancar." },
+                    { n: "Daily Farm (7 Hari)", p: 80000, d: "Jasa harian selama 7 hari (Login, Clear Daily Mission, dan kuras habis Stamina rutin)." },
+                    { n: "Starter Siap Tempur", p: 300000, d: "Story Ch 1-3 Tamat + Full Map Dasar Terbuka + Base Tier 2. Chief tinggal main elit." },
+                    { n: "Pro-Farmer Setup", p: 500000, d: "Story Ch 1-5 Tamat + Full Map Exploration + Base Tier 4. Setup pabrik kompleks siap tempur." },
+                    { n: "Akun Elit (End-Game)", p: 850000, d: "Full Story & Map + Setup Tower 6 Jalur + Bonus Maintenance Gratis 1 bulan. Kasta tertinggi." },
+                    { n: "The Hub Map (Sultan)", p: 1377000, d: "Full Service eksplorasi map The Hub secara menyeluruh skala internasional. Clear 100%." },
+                    { n: "Valley IV (Sultan)", p: 1836000, d: "Full Progress khusus area Valley IV dengan standar pengerjaan tinggi sampai tuntas tervalidasi." },
+                    { n: "End-Game Integration", p: 2500000, d: "Setup base end-game paling kompleks Sultan. Integrasi seluruh sistem produksi otomatis total." }
+                ], 
+                logins: ["GOOGLE", "GRYPHLINE", "EMAIL"]
+            }
+        };
+
+        let curG, curP, curPr, curL, curPy, curT;
+
+        function goToStep2(game) { 
+            curG = game; 
+            document.getElementById('step1').classList.add('hidden'); 
+            document.getElementById('step2').classList.remove('hidden');
+            document.getElementById('gameBannerTop').src = gameData[game].banner; 
+            render(); 
+        }
+
+        function render() {
+            const data = gameData[curG];
+            document.getElementById('pkgGrid').innerHTML = data.pkgs.map(p => `
+                <div onclick="selectPkg(this, '${p.n}', ${p.p}, '${p.type}')" class="glass-card p-5 rounded-[1.5rem] flex flex-col justify-between">
+                    <p class="font-black italic text-[10px] text-white uppercase leading-none mb-1 text-left">${p.n}</p>
+                    <p class="text-blue-500 font-black italic text-[11px] leading-none mb-2 text-left">Rp ${p.p.toLocaleString()}</p>
+                    <div class="desc-inline"><p class="desc-text">${p.d}</p></div>
+                </div>`).join('');
+            document.getElementById('loginOptions').innerHTML = data.logins.map(l => `<div onclick="setL(this, '${l}')" class="l-opt glass-card p-2 rounded-xl text-[9px] font-bold text-center uppercase">${l}</div>`).join('');
+        }
+
+        function selectPkg(el, n, p, type) { 
+            curP = n; curPr = p; curT = type;
+            document.querySelectorAll('#pkgGrid > div').forEach(div => div.classList.remove('selected-item')); 
+            el.classList.add('selected-item'); 
+            document.getElementById('totalPrice').innerText = `Rp ${p.toLocaleString()}`; 
+            document.getElementById('formData').classList.remove('hidden'); 
+            document.getElementById('endfieldExtras').classList.toggle('hidden', curG !== 'endfield'); 
+            document.getElementById('baseExtras').classList.toggle('hidden', !(curG === 'endfield' && type === 'base'));
+        }
+
+        function validateProof(input) {
+            const btn = document.getElementById('btnSubmitOrder');
+            const label = document.getElementById('fileNameLabel');
+            if (input.files && input.files[0]) {
+                label.innerText = "BUKTI SIAP: " + input.files[0].name.substring(0, 15) + "...";
+                btn.disabled = false;
+                btn.innerText = "SAYA SUDAH BAYAR";
+                btn.classList.replace('bg-gray-700', 'gaming-gradient');
+                btn.classList.replace('text-gray-500', 'text-white');
+            }
+        }
+
+        function setL(el, type) { curL = type; document.querySelectorAll('.l-opt').forEach(t => t.classList.remove('selected-item')); el.classList.add('selected-item'); }
+        function setPay(el, m) { curPy = m; document.querySelectorAll('.pay-opt').forEach(c => c.classList.remove('selected-item')); el.classList.add('selected-item'); document.getElementById('bankDetail').innerText = paymentAccounts[m]; document.getElementById('qrisContainer').classList.toggle('hidden', m !== 'QRIS'); }
+        function openAuthModal(t) { document.getElementById('modalAuth').classList.remove('hidden'); document.getElementById('loginForm').classList.toggle('hidden', t !== 'login'); document.getElementById('registerForm').classList.toggle('hidden', t !== 'register'); }
+        function closeAuthModal() { document.getElementById('modalAuth').classList.add('hidden'); }
+        function closeModal() { document.getElementById('modalPay').classList.add('hidden'); }
+        function backToStep1() { location.reload(); }
+        function prosesCheckout() { if(!curP || !curPy || !document.getElementById('uWa').value) return notify('Lengkapi Data!', '#ef4444'); document.getElementById('modalPay').classList.remove('hidden'); }
+        
+        function kirimOrderKeServer() {
+            const trk = 'MARI-' + Math.floor(Math.random()*99999);
+            document.getElementById('invoiceBox').innerText = `-------------------------\nMA-RI STORE INVOICE\n-------------------------\nTRK ID: ${trk}\nGAME  : ${curG.toUpperCase()}\nPKT   : ${curP}\nTOT   : Rp ${curPr.toLocaleString()}\nWA    : ${document.getElementById('uWa').value}\nSTATUS: TERKIRIM KE ADMIN`;
+            document.getElementById('payView').classList.add('hidden');
+            document.getElementById('successView').classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
