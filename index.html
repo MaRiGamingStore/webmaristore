@@ -101,6 +101,7 @@
             outline: none; 
         }
 
+        /* Banner Step 2 Fix */
         .banner-step2-fixed { 
             width: 100%; 
             max-width: 800px; 
@@ -121,6 +122,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
         }
 
+        /* Notifikasi Toast */
         #toast { 
             visibility: hidden; 
             min-width: 280px; 
@@ -265,7 +267,7 @@
                         <div class="space-y-6">
                             <div class="p-4 bg-gray-800/30 rounded-2xl border border-gray-700 text-left">
                                 <p class="text-[9px] font-black text-blue-500 uppercase mb-3 tracking-widest">METODE PEMBAYARAN:</p>
-                                <div class="grid grid-cols-3 gap-2 text-[9px] font-black uppercase">
+                                <div class="grid grid-cols-3 gap-2 text-[9px] font-black uppercase text-left">
                                     <div onclick="setPay(this, 'QRIS')" class="pay-opt glass-card p-3 rounded-xl text-center">QRIS</div>
                                     <div onclick="setPay(this, 'DANA')" class="pay-opt glass-card p-3 rounded-xl text-center">DANA</div>
                                     <div onclick="setPay(this, 'OVO')" class="pay-opt glass-card p-3 rounded-xl text-center">OVO</div>
@@ -283,7 +285,7 @@
 
             <footer class="mt-20 border-t-4 border-blue-500 pt-10 pb-10 text-left">
                 <div class="flex flex-col md:flex-row justify-between gap-10">
-                    <div class="max-w-md">
+                    <div class="max-w-md text-left">
                         <h3 class="text-blue-500 font-black italic mb-4 uppercase text-sm tracking-widest leading-none text-left">MaRi Gaming Store</h3>
                         <p class="text-[11px] text-gray-400 italic font-bold leading-relaxed text-left">"MaRi Gaming Store, MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</p>
                         <div class="flex gap-4 mt-6">
@@ -310,7 +312,7 @@
                 <div id="qrisContainer" class="hidden mb-6"><img src="qris.png" class="mx-auto w-48 h-48 rounded-xl border border-white/10 p-2 bg-white"></div>
                 
                 <div class="mb-6">
-                    <label for="proofFile" class="file-upload-label">
+                    <label for="proofFile" class="file-upload-label text-center">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                         <span id="fileNameLabel" class="text-[9px] font-black uppercase">Upload Bukti Transfer</span>
                     </label>
@@ -322,7 +324,7 @@
                 <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)]"><i class="fa-solid fa-check text-4xl"></i></div>
                 <h3 class="font-black italic text-xl mb-2 text-white uppercase tracking-tighter text-center">ORDERAN MENDARAT!</h3>
                 <div id="invoiceBox" class="bg-black/30 p-4 rounded-2xl text-left border border-gray-800 text-[10px] font-mono text-blue-400 space-y-1 mb-8 whitespace-pre leading-tight overflow-x-auto text-left"></div>
-                <p class="text-[9px] text-gray-500 italic uppercase font-black mb-6 text-center leading-tight">Laporan telah dikirim otomatis ke WhatsApp Admin Markas!</p>
+                <p class="text-[9px] text-gray-500 italic uppercase font-black mb-6 text-center leading-tight">Data login & laporan joki telah dikirim otomatis ke WhatsApp Admin Markas!</p>
                 <button onclick="location.reload()" class="w-full bg-gray-800 py-4 rounded-2xl font-black italic uppercase border border-gray-700 hover:text-blue-500 transition tracking-widest">KEMBALI KE HOME</button>
             </div>
         </div>
@@ -333,14 +335,14 @@
             <button onclick="closeAuthModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
             <div id="loginForm" class="hidden space-y-5">
                 <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">LOGIN CHIEF</h3>
-                <input type="email" id="logEmail" placeholder="Email Akun..." class="w-full p-5 rounded-2xl font-bold italic text-left">
-                <input type="password" id="logPass" placeholder="Password..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <input type="email" id="logEmail" placeholder="Email Akun..." class="w-full p-5 rounded-2xl font-bold italic">
+                <input type="password" id="logPass" placeholder="Password..." class="w-full p-5 rounded-2xl font-bold italic">
                 <button onclick="handleAuth('login')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">MASUK MARKAS</button>
             </div>
             <div id="registerForm" class="hidden space-y-5">
                 <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">DAFTAR AKUN</h3>
-                <input type="email" id="regEmail" placeholder="Email Baru..." class="w-full p-5 rounded-2xl font-bold italic text-left">
-                <input type="password" id="regPass" placeholder="Password Baru..." class="w-full p-5 rounded-2xl font-bold italic text-left">
+                <input type="email" id="regEmail" placeholder="Email Baru..." class="w-full p-5 rounded-2xl font-bold italic">
+                <input type="password" id="regPass" placeholder="Password Baru..." class="w-full p-5 rounded-2xl font-bold italic">
                 <button onclick="handleAuth('register')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">GABUNG SEKARANG</button>
             </div>
         </div>
@@ -389,30 +391,38 @@
         const paymentAccounts = { 'QRIS': 'SCAN KODE QR DI BAWAH CHIEF!', 'DANA': 'DANA: 0895-3203-02320 (A/N RIDWAN)', 'OVO': 'OVO: 0851-5690-6427 (A/N RIDWAN)' };
         
         const gameData = {
-            mlbb: { banner: "ml_logo.png", pkgs: [
-                { n: "Joki Master (Per ⭐)", p: 2000, d: "Layanan pengerjaan rank Master cepat. Winrate aman Chief. Hero pool luas." },
-                { n: "Joki Grandmaster (Per ⭐)", p: 3000, d: "Beresin rank GM tanpa keki. Cocok buat naik ke Epic." },
-                { n: "Joki Epic (Per ⭐)", p: 5000, d: "Layanan joki tier badak secepat kilat. Pro joki only." },
-                { n: "Joki Legend (Per ⭐)", p: 7000, d: "Otw Mythic lancar jaya. Hero pool luas menyesuaikan meta terbaru." },
-                { n: "Joki Mythic (Per ⭐)", p: 15000, d: "Rank kasta tinggi pengerjaan elit tervalidasi." }
-            ], logins: ["MOONTON", "GOOGLE", "FB"]},
-            endfield: { banner: "endfield_logo.png", pkgs: [
-                { n: "Tier 1 (Rafinasi)", p: 5000, d: "Setting 1 jenis produksi material awal (Rafinasi). Bukan 1 base utuh Chief.", type: 'base' },
-                { n: "Tier 2 (Conveyor)", p: 10000, d: "Pembuatan jalur conveyor belt otomatis sederhana untuk 1 jenis material dasar.", type: 'base' },
-                { n: "Tier 3 (Optimization)", p: 35000, d: "Re-layout total jalur produksi yang berantakan agar workflow lancar.", type: 'base' },
-                { n: "Tier 4 (Professional)", p: 50000, d: "Pemasangan jalur logistik otomatis skala menengah.", type: 'base' },
-                { n: "Tier End (God Tier)", p: 100000, d: "Setting 6 Jalur Logistik maksimal. Produksi super cepat & efisiensi 100%.", type: 'base' },
-                { n: "Per Chapter (Story)", p: 20000, d: "Clear misi utama per chapter pilihan Chief." },
-                { n: "Paket Story (Ch 1-3)", p: 120000, d: "Akselerasi story awal sampai tamat Chapter 3. Progres cepat tanpa keki." },
-                { n: "Full Map Exploration", p: 125000, d: "Unlock Kabut, Beacon, & Teleport di area yang tersedia agar akses Chief lancar." },
-                { n: "Daily Farm (7 Hari)", p: 80000, d: "Jasa harian selama 7 hari (Login, Clear Daily, dan kuras habis Stamina rutin)." },
-                { n: "Starter Siap Tempur", p: 300000, d: "Story Ch 1-3 Tamat + Full Map Dasar Terbuka + Base Tier 2. Chief tinggal main elit." },
-                { n: "Pro-Farmer Setup", p: 500000, d: "Story Ch 1-5 Tamat + Full Map Exploration + Base Tier 4. Setup pabrik kompleks siap tempur." },
-                { n: "Akun Elit (End-Game)", p: 850000, d: "Full Story & Map + Setup Tower 6 Jalur + Bonus Maintenance Gratis 1 bulan." },
-                { n: "The Hub Map (Sultan)", p: 1377000, d: "Full Service eksplorasi map The Hub secara menyeluruh skala internasional. Clear 100%." },
-                { n: "Valley IV (Sultan)", p: 1836000, d: "Full Progress khusus area Valley IV dengan standar pengerjaan tinggi sampai tuntas." },
-                { n: "End-Game Integration", p: 2500000, d: "Setup base end-game paling kompleks Sultan. Integrasi sistem otomatis total." }
-            ], logins: ["GOOGLE", "GRYPHLINE", "EMAIL"]}
+            mlbb: { 
+                banner: "ml_logo.png", 
+                pkgs: [
+                    { n: "Joki Master (Per ⭐)", p: 2000, d: "Layanan pengerjaan cepat rank Master. Winrate aman Chief. Hero meta pool luas." },
+                    { n: "Joki Grandmaster (Per ⭐)", p: 3000, d: "Beresin rank GM tanpa keki. Cocok buat naik ke Epic dengan winrate manis." },
+                    { n: "Joki Epic (Per ⭐)", p: 5000, d: "Layanan joki tier badak. Pengerjaan secepat kilat oleh joki professional." },
+                    { n: "Joki Legend (Per ⭐)", p: 7000, d: "Otw Mythic lancar jaya. Hero pool luas menyesuaikan meta terbaru." },
+                    { n: "Joki Mythic (Per ⭐)", p: 15000, d: "Rank kasta tinggi pengerjaan elit." }
+                ], 
+                logins: ["MOONTON", "GOOGLE", "FB"]
+            },
+            endfield: { 
+                banner: "endfield_logo.png", 
+                pkgs: [
+                    { n: "Tier 1 (Rafinasi)", p: 5000, d: "Khusus setting 1 jenis produksi material awal (Rafinasi). Bukan 1 base utuh Chief.", type: 'base' },
+                    { n: "Tier 2 (Conveyor)", p: 10000, d: "Pembuatan jalur conveyor otomatis sederhana untuk 1 jenis material dasar.", type: 'base' },
+                    { n: "Tier 3 (Optimization)", p: 35000, d: "Re-layout total jalur produksi yang berantakan agar workflow lancar.", type: 'base' },
+                    { n: "Tier 4 (Professional)", p: 50000, d: "Integrasi logistik otomatis skala menengah.", type: 'base' },
+                    { n: "Tier End (God Tier)", p: 100000, d: "Setting 6 Jalur Logistik maksimal. Produksi super cepat & efisiensi 100%.", type: 'base' },
+                    { n: "Per Chapter (Story)", p: 20000, d: "Clear misi utama per chapter pilihan Chief." },
+                    { n: "Paket Story (Ch 1-3)", p: 120000, d: "Akselerasi story tamat Chapter 3. Progres cepat." },
+                    { n: "Full Map Exploration", p: 125000, d: "Unlock Kabut, Beacon, & Teleport di area yang tersedia." },
+                    { n: "Daily Farm (7 Hari)", p: 80000, d: "Jasa harian selama 7 hari (Login, Clear Daily, Kuras Stamina)." },
+                    { n: "Starter Siap Tempur", p: 300000, d: "Story Ch 1-3 Tamat + Full Map Dasar + Base Tier 2." },
+                    { n: "Pro-Farmer Setup", p: 500000, d: "Story Ch 1-5 Tamat + Full Map + Base Tier 4." },
+                    { n: "Akun Elit (End-Game)", p: 850000, d: "Full Story & Map + Setup Tower 6 Jalur + Bonus Maintenance." },
+                    { n: "The Hub Map (Sultan)", p: 1377000, d: "Full Service eksplorasi map The Hub secara menyeluruh. Clear 100%." },
+                    { n: "Valley IV (Sultan)", p: 1836000, d: "Full Progress khusus area Valley IV dengan standar pengerjaan tinggi." },
+                    { n: "End-Game Integration", p: 2500000, d: "Setup base end-game Sultan. Integrasi sistem otomatis total." }
+                ], 
+                logins: ["GOOGLE", "GRYPHLINE", "EMAIL"]
+            }
         };
 
         let curG, curP, curPr, curL, curPy, curT, globalTrk;
@@ -472,41 +482,50 @@
             const base = document.getElementById('baseName').value || '-';
             const aic = document.getElementById('lvlAIC').value || '-';
 
-            // FORMAT PESAN BOT
+            // FORMAT PESAN BOT (DARI BOT KE PRIBADI)
             let msg = `*ORDERAN JOKI BARU - MaRi STORE*\n\n`;
-            msg += `*ID Transaksi:* ${globalTrk}\n`;
-            msg += `*Game:* ${curG.toUpperCase()}\n`;
-            msg += `*Paket:* ${curP}\n`;
-            msg += `*Total:* Rp ${curPr.toLocaleString()}\n`;
-            msg += `*Pembayaran:* ${curPy}\n\n`;
+            msg += `ID: ${globalTrk}\n`;
+            msg += `Game: ${curG.toUpperCase()}\n`;
+            msg += `Paket: ${curP}\n`;
+            msg += `Total: Rp ${curPr.toLocaleString()}\n`;
+            msg += `Pay: ${curPy}\n\n`;
             msg += `*--- DATA AKUN ---*\n`;
-            msg += `*Login Via:* ${curL}\n`;
-            msg += `*User/Email:* ${uId}\n`;
-            msg += `*Password:* ${uPass}\n`;
-            msg += `*WA Buyer:* ${uWa}\n\n`;
-            
+            msg += `Login: ${curL}\n`;
+            msg += `User: ${uId}\n`;
+            msg += `Pass: ${uPass}\n`;
+            msg += `WA Buyer: ${uWa}\n\n`;
             if(curG === 'endfield') {
                 msg += `*--- DETAIL ENDFIELD ---*\n`;
-                msg += `*Explo/Otoritas:* ${explo}/${otor}\n`;
-                msg += `*Base/AIC:* ${base} (${aic})\n\n`;
+                msg += `Explo/Oto: ${explo}/${otor}\n`;
+                msg += `Base: ${base} (${aic})\n\n`;
             }
-            msg += `_MaRi Gaming Store - Akun Jadi Elit, Lu Tinggal Ngupi_`;
+            msg += `_MaRi Gaming Store_`;
 
-            // EKSEKUSI API FONNTE (TOKEN TERPASANG)
-            try {
-                await fetch('https://api.fonnte.com/send', {
-                    method: 'POST',
-                    headers: { 'Authorization': 'FZntVMqyjtucpyaYumad' },
-                    body: new URLSearchParams({
-                        'target': '62895320302320', // Nomor WA Lu Chief Ridwan
-                        'message': msg
-                    })
-                });
-                notify("Bot Terkirim!", "#22c55e");
-            } catch (err) { 
-                console.error("Bot Error: ", err); 
-                notify("Sistem Bot Offline!", "#ef4444");
-            }
+            // FIX TEMBAK API KE NOMOR PRIBADI (085156906427)
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", "FZntVMqyjtucpyaYumad");
+
+            var formdata = new FormData();
+            formdata.append("target", "085156906427"); // TARGET NOMOR PRIBADI LU
+            formdata.append("message", msg);
+
+            var requestOptions = {
+              method: 'POST',
+              headers: myHeaders,
+              body: formdata,
+              redirect: 'follow'
+            };
+
+            fetch("https://api.fonnte.com/send", requestOptions)
+              .then(response => response.text())
+              .then(result => {
+                  console.log(result);
+                  notify("Laporan Terkirim!", "#22c55e");
+              })
+              .catch(error => {
+                  console.log('error', error);
+                  notify("Gagal Kirim Laporan!", "#ef4444");
+              });
 
             const invoiceText = `-------------------------\nMA-RI STORE INVOICE\n-------------------------\nTRK ID: ${globalTrk}\nGAME  : ${curG.toUpperCase()}\nPKT   : ${curP}\nTOT   : Rp ${curPr.toLocaleString()}\nWA    : ${uWa}\nSTATUS: TERKIRIM KE ADMIN`;
             document.getElementById('invoiceBox').innerText = invoiceText;
