@@ -2,526 +2,261 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaRi Gaming Store | Akun Jadi Elit, Lu Tinggal Ngupi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MaRi GAMING STORE | Akun Jadi Elit, Lu Tinggal Ngupi</title>
     
+    <link rel="icon" href="logo.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-
+        
+        html { scroll-behavior: smooth; }
+        
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #0b0e14; 
             color: #e2e8f0; 
             overflow-x: hidden; 
-            font-size: 12px; 
+            font-size: 13px;
             min-height: 100vh; 
             display: flex; 
-            flex-direction: column; 
+            flex-direction: column;
         }
 
-        /* Sidebar Gahar */
+        /* SIDEBAR SULTAN LOCKED 220px */
         .sidebar { 
-            background: #161b22; 
-            border-right: 1px solid #30363d; 
-            height: 100vh; 
-            position: fixed; 
-            left: 0; 
-            top: 0; 
-            width: 230px; 
-            z-index: 50; 
-            display: flex; 
-            flex-direction: column; 
+            background: #161b22; border-right: 1px solid #30363d; height: 100vh; position: fixed; 
+            left: 0; top: 0; width: 220px; z-index: 50; display: flex; flex-direction: column; padding: 20px;
         }
 
-        .main-content { 
-            margin-left: 230px; 
-            padding: 1.5rem; 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
+        .main-content { margin-left: 220px; padding: 0; flex: 1; display: flex; flex-direction: column; }
 
-        @media (max-width: 768px) { 
-            .sidebar { display: none; } 
-            .main-content { margin-left: 0; padding: 1rem; } 
-        }
+        @media (max-width: 768px) { .sidebar { display: none; } .main-content { margin-left: 0; width: 100%; } }
 
-        /* Card System */
         .glass-card { 
-            background: #161b22; 
-            border: 1px solid #30363d; 
-            transition: 0.3s; 
-            cursor: pointer; 
-            border-radius: 1.2rem; 
+            background: #161b22; border: none !important; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer; border-radius: 1rem; overflow: hidden;
         }
+        .glass-card:hover { box-shadow: 0 0 30px rgba(59, 130, 246, 0.2); transform: translateY(-5px); }
+        .selected-item { background: rgba(59, 130, 246, 0.1) !important; border: 2px solid #3b82f6 !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
 
-        .glass-card:hover { 
-            border-color: #3b82f6; 
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); 
-        }
+        .gaming-gradient { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
 
-        .selected-item { 
-            border-color: #3b82f6 !important; 
-            background: rgba(59, 130, 246, 0.1) !important; 
-        }
+        /* HEADER CENTRAL SOLID */
+        .elite-header { background-color: #161b22 !important; padding: 4rem 1rem; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 2rem; }
+        .header-brand-container img { width: 100px; height: 100px; margin: 0 auto 1.5rem; filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4)); }
+        .header-brand-container h1 { font-size: 2.5rem; font-weight: 900; color: #3b82f6; font-style: italic; text-transform: uppercase; }
+        .header-brand-container p { font-size: 12px; color: #94a3b8; letter-spacing: 5px; font-weight: 800; }
 
-        .gaming-gradient { 
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); 
-        }
+        .banner-main { width: 100%; max-height: 220px; border-radius: 1.5rem; object-fit: contain; margin-bottom: 3.5rem; padding: 0; background: #0d1117; }
 
-        .desc-inline { 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: 0.5s ease-out; 
-        }
+        .form-section { background: #161b22; border: 1px solid #30363d; border-radius: 1.2rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+        input, select { background: #0d1117 !important; border: 1px solid #30363d !important; color: white !important; font-weight: 600; padding: 14px 16px !important; border-radius: 10px !important; width: 100%; outline: none; font-size: 12px; }
 
-        .selected-item .desc-inline { 
-            max-height: 800px; 
-            margin-top: 10px; 
-            border-top: 1px solid rgba(59, 130, 246, 0.2); 
-            padding-top: 8px; 
-        }
+        .l-opt, .pay-opt { background: #0d1117; border: 1px solid #30363d; padding: 1.2rem; text-align: center; border-radius: 1rem; font-weight: 800; font-size: 11px; cursor: pointer; transition: 0.3s; }
+        .l-opt.selected-item, .pay-opt.selected-item { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.1) !important; }
 
-        .desc-text { 
-            font-size: 11px !important; 
-            line-height: 1.6 !important; 
-            font-weight: 600 !important; 
-            color: #cbd5e1 !important; 
-            text-align: left;
-        }
+        .wa-note { color: #ff4444; font-weight: 900; font-style: italic; font-size: 10px; text-transform: uppercase; margin-top: 10px; display: block; line-height: 1.6; }
 
-        input, select { 
-            background: #1c2128 !important; 
-            border: 1px solid #30363d !important; 
-            color: white !important; 
-            font-size: 11px !important; 
-            outline: none; 
-        }
+        .float-wa { position: fixed; bottom: 30px; right: 30px; z-index: 1000; text-align: center; }
+        .wa-btn { width: 65px; height: 65px; background-color: #25d366; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); animation: pulse 2.5s infinite; }
 
-        /* Banner Step 2 Fix */
-        .banner-step2-fixed { 
-            width: 100%; 
-            max-width: 800px; 
-            height: 220px; 
-            border-radius: 2rem; 
-            border: 1px solid #30363d; 
-            object-fit: cover; 
-            margin: 0 auto 2rem auto; 
-            display: block; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
+        #invoiceBox { background: #fff; color: #000; padding: 30px; border-radius: 20px; font-family: 'Courier New', monospace; border: 2px dashed #000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .inv-row { display: flex; justify-content: space-between; border-bottom: 1px dotted #888; padding: 6px 0; font-size: 11px; text-transform: uppercase; font-weight: 800; }
+        
+        #eliteNotif { position: fixed; inset: 0; background: rgba(11,14,20,0.96); z-index: 10000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+        .notif-box { background: #161b22; border: 2px solid #3b82f6; padding: 3.5rem; border-radius: 3rem; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 0 60px rgba(59, 130, 246, 0.4); }
 
-        .banner-store { 
-            width: 100%; 
-            height: auto; 
-            border-radius: 2rem; 
-            border: 1px solid #30363d; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-        }
+        .pkg-desc-box { max-height: 0; overflow: hidden; transition: 0.4s ease; opacity: 0; font-size: 11px; color: #94a3b8; }
+        .selected-item .pkg-desc-box { max-height: 500px; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(59, 130, 246, 0.3); opacity: 1; color: #e2e8f0; }
 
-        /* Notifikasi Toast */
-        #toast { 
-            visibility: hidden; 
-            min-width: 280px; 
-            background: #161b22; 
-            border: 1px solid #3b82f6; 
-            color: #fff; 
-            text-align: left; 
-            border-radius: 1rem; 
-            padding: 16px; 
-            position: fixed; 
-            z-index: 1000; 
-            right: 20px; 
-            top: 20px; 
-            font-weight: 600; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-        }
-
-        #toast.show { 
-            visibility: visible; 
-            animation: slideIn 0.5s, slideOut 0.5s 2.5s; 
-        }
-
-        .file-upload-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #1c2128;
-            border: 2px dashed #30363d;
-            padding: 15px;
-            border-radius: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+        .ef-note { background: rgba(59, 130, 246, 0.1); border: 1px dashed #3b82f6; padding: 12px; border-radius: 10px; color: #3b82f6; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
-    <div id="toast">Notifikasi MaRI Store</div>
+    <div id="eliteNotif">
+        <div class="notif-box">
+            <i class="fa-solid fa-bolt-lightning text-blue-500 text-5xl mb-6"></i>
+            <h3 class="font-black italic text-2xl text-white uppercase mb-4 tracking-widest">Markas MaRi</h3>
+            <p id="notifMsg" class="text-gray-400 font-bold uppercase text-[11px] leading-relaxed mb-10"></p>
+            <button onclick="closeNotif()" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase tracking-widest shadow-2xl">OKE CHIEF!</button>
+        </div>
+    </div>
 
-    <aside class="sidebar p-5 hidden md:flex text-left">
-        <div class="mb-4 flex items-center gap-3">
-            <img src="logo.png" class="w-8 h-8 rounded-lg border border-blue-500 shadow-lg object-cover">
-            <h1 class="text-[10px] font-black italic text-blue-500 uppercase tracking-tighter leading-tight">MaRi Gaming Store</h1>
+    <div class="float-wa">
+        <a href="https://wa.me/62895320302320" class="wa-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        <div class="bg-[#161b22] text-[#25d366] px-4 py-1.5 rounded-xl border border-[#25d366] text-[10px] font-black uppercase text-center shadow-2xl">CS KONSULTASI</div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="mb-6 flex items-center justify-center gap-3 p-3 bg-blue-500/5 rounded-2xl border border-blue-500/10">
+            <img src="logo.png" class="w-7 h-7 object-contain opacity-80">
+            <p class="font-black italic text-gray-400 uppercase tracking-widest text-[10px]">MaRi STORE</p>
         </div>
-        
-        <div id="userProfile" class="mb-6 p-4 bg-blue-600/5 border border-blue-500/20 rounded-2xl hidden">
-            <p class="text-[8px] font-black text-blue-500 uppercase mb-1">WELCOME BACK CHIEF,</p>
-            <p id="profileName" class="text-[10px] font-bold text-white italic uppercase truncate">USER</p>
-            <button onclick="logout()" class="mt-2 text-[8px] text-red-500 font-bold uppercase hover:underline">Logout</button>
-        </div>
-        
-        <div id="authButtons" class="mb-6 space-y-2">
-            <div class="grid grid-cols-2 gap-2">
-                <button onclick="openAuthModal('login')" class="p-2 bg-gray-800 border border-gray-700 rounded-xl text-[9px] font-black uppercase hover:border-blue-500 transition">Login</button>
-                <button onclick="openAuthModal('register')" class="p-2 gaming-gradient rounded-xl text-[9px] font-black uppercase shadow-lg">Daftar</button>
+
+        <div class="mb-6 p-4 bg-gray-800 rounded-2xl border border-gray-700 text-left">
+            <p id="langTitle" class="text-[9px] font-black text-gray-500 uppercase mb-3 tracking-widest">PILIH BAHASA:</p>
+            <div class="space-y-2.5">
+                <button onclick="changeLang('id')" id="btnID" class="w-full text-left p-2.5 text-[10px] font-bold border-2 border-blue-500 rounded-xl bg-blue-500/10 flex items-center gap-4 transition">
+                    <img src="https://flagcdn.com/w20/id.png" class="w-5"> INDONESIA
+                </button>
+                <button onclick="changeLang('en')" id="btnEn" class="w-full text-left p-2.5 text-[10px] font-bold border-2 border-gray-700 rounded-xl flex items-center gap-4 transition hover:border-gray-500">
+                    <img src="https://flagcdn.com/w20/us.png" class="w-5"> ENGLISH
+                </button>
             </div>
-            <button onclick="loginGoogle()" class="w-full p-2 bg-white text-black rounded-xl text-[9px] font-black uppercase flex items-center justify-center gap-2">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-3"> Login Google
+        </div>
+
+        <div id="authPanel" class="mb-6 space-y-3 text-center px-2">
+            <div id="userProfile" class="hidden p-4 bg-blue-500/10 rounded-xl border border-blue-500/20 text-center">
+                <p id="profileName" class="text-[11px] font-bold text-white truncate"></p>
+                <button onclick="handleLogout()" class="text-[10px] text-red-500 font-black uppercase mt-3">Logout</button>
+            </div>
+            <div id="authGuest" class="grid grid-cols-2 gap-2">
+                <button onclick="openAuthModal()" class="p-2.5 bg-gray-800 border border-gray-700 rounded-xl text-[10px] font-black uppercase transition hover:border-blue-500">Login</button>
+                <button onclick="openAuthModal()" class="p-2.5 gaming-gradient rounded-xl text-[10px] font-black uppercase shadow-lg">Daftar</button>
+            </div>
+            <button onclick="loginGoogle()" class="w-full p-2.5 bg-white text-black rounded-xl text-[10px] font-black flex items-center justify-center gap-2 shadow-lg mt-3">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-3.5"> Google Login
             </button>
         </div>
 
-        <div class="bg-blue-600/5 border border-blue-500/20 p-3 rounded-2xl mb-4 text-left">
-            <p class="text-[8px] font-black text-blue-500 uppercase mb-1">Server Status:</p>
-            <p class="text-[10px] font-bold text-green-500 italic uppercase">● ONLINE & FAST RESPONSE</p>
-        </div>
+        <button onclick="openStatusModal()" class="w-full mb-6 p-4 border-2 border-blue-500 rounded-2xl text-blue-500 font-black italic uppercase text-[10px] hover:bg-blue-500/10 transition">CEK STATUS JOKI</button>
 
-        <div class="grid grid-cols-2 gap-2 mb-6">
-            <a href="https://www.tiktok.com/@mari.gaming.store" target="_blank" class="flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl hover:border-blue-500 transition">
-                <i class="fa-brands fa-tiktok text-white"></i>
-            </a>
-            <a href="https://www.instagram.com/marigamingstore/" target="_blank" class="flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl hover:border-blue-500 transition">
-                <i class="fa-brands fa-instagram text-white"></i>
-            </a>
-        </div>
-
-        <nav class="mt-auto space-y-1 font-bold italic text-[11px] text-gray-400 border-t border-gray-800 pt-4">
-            <a href="#" onclick="location.reload()" class="flex items-center gap-3 p-3 rounded-xl hover:text-blue-500 transition"><i class="fa-solid fa-house"></i> HOME</a>
-            <a href="#" onclick="window.open('https://wa.me/0895320302320')" class="flex items-center gap-3 p-3 rounded-xl hover:text-blue-500 transition"><i class="fa-solid fa-headset"></i> KONSULTASI ADMIN</a>
+        <nav class="mt-auto border-t border-gray-800 pt-6 text-center">
+            <a href="#" onclick="location.reload()" class="font-black uppercase italic tracking-widest text-[11px] hover:text-blue-500 transition"><i class="fa-solid fa-house"></i> BERANDA</a>
         </nav>
     </aside>
 
     <main class="main-content">
-        <div class="max-w-[900px] mx-auto w-full">
-            
-            <img src="banner.png" class="banner-store shadow-2xl mb-10">
+        <header class="elite-header">
+            <div class="header-brand-container">
+                <img src="logo.png">
+                <h1>MaRi GAMING STORE</h1>
+                <p>Akun Jadi Elit, Lu Tinggal Ngupi</p>
+            </div>
+        </header>
 
-            <div id="step1" class="page-step active text-center">
-                <h2 class="text-xs font-black italic text-blue-500 mb-8 tracking-widest uppercase">/ 01. PILIH GAME</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
-                    <div onclick="goToStep2('mlbb')" class="group cursor-pointer w-fit mx-auto">
-                        <img src="ml_logo.png" class="w-[229px] h-[124px] object-cover rounded-2xl border border-gray-700 group-hover:border-blue-500 transition shadow-xl mb-4">
-                        <p class="font-black italic text-sm uppercase group-hover:text-blue-500 transition">MOBILE LEGENDS</p>
-                    </div>
-                    <div onclick="goToStep2('endfield')" class="group cursor-pointer w-fit mx-auto">
-                        <img src="endfield_logo.png" class="w-[229px] h-[124px] object-cover rounded-2xl border border-gray-700 group-hover:border-blue-500 transition shadow-xl mb-4">
-                        <p class="font-black italic text-sm uppercase group-hover:text-blue-500 transition">ARKNIGHTS: ENDFIELD</p>
-                    </div>
+        <div class="max-w-[1100px] mx-auto w-full px-8">
+            <img src="banner.png" class="banner-main" id="mainBanner">
+
+            <div id="step1" class="page-step active">
+                <div class="flex items-center gap-5 mb-12">
+                    <div class="w-3 h-12 bg-blue-500 rounded-full"></div>
+                    <h2 id="step1Head" class="text-xl font-black italic text-blue-500 tracking-[0.05em] uppercase">GAS PILIH GAME KESAYANGAN LU, CHIEF</h2>
                 </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="gameList"></div>
             </div>
 
-            <div id="step2" class="page-step hidden text-left">
-                <button onclick="backToStep1()" class="text-blue-500 font-bold text-[9px] uppercase italic mb-6 inline-block hover:underline"><i class="fa-solid fa-arrow-left mr-1"></i> KEMBALI</button>
-                <img id="gameBannerTop" src="" class="banner-step2-fixed shadow-2xl">
-                <h2 class="text-xs font-black italic text-blue-500 mb-6 tracking-widest uppercase">/ 02. PILIH LAYANAN</h2>
-                <div id="pkgGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-10"></div>
+            <div id="step2" class="page-step hidden">
+                <div id="scrollAnchor"></div>
+                <img id="gameBannerTop" src="" class="banner-main"> 
+                <h2 id="step2Head" class="text-lg font-black italic text-blue-500 mb-10 uppercase text-center">LAYANAN JOKI SULTAN TERSEDIA</h2>
+                <div id="catFilter" class="flex flex-wrap gap-4 mb-12 justify-center"></div>
+                <div id="pkgGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"></div>
                 
+                <button onclick="backToStep1()" class="bg-gray-800 text-blue-500 font-bold text-[13px] px-12 py-6 rounded-2xl uppercase italic border border-gray-700 mb-20 hover:bg-gray-700 transition shadow-2xl"><i class="fa-solid fa-arrow-left mr-2"></i> Kembali</button>
+
                 <div id="formData" class="hidden">
-                    <div class="mt-10 mb-10 border-b-4 border-blue-500 opacity-50"></div>
-                    <h2 class="text-xs font-black italic text-blue-500 mb-6 tracking-widest uppercase">/ 03. DATA LOGIN & PEMBAYARAN</h2>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="space-y-4">
-                            <div id="endfieldExtras" class="hidden grid grid-cols-2 gap-3">
-                                <input type="text" id="lvlExplo" placeholder="Lvl Eksplorasi..." class="p-4 rounded-xl font-bold italic">
-                                <input type="text" id="lvlOto" placeholder="Lvl Otoritas..." class="p-4 rounded-xl font-bold italic">
+                    <div class="mt-16 mb-16 border-b border-blue-500 opacity-20"></div>
+                    <h2 id="step3Head" class="text-xl font-black italic text-blue-500 mb-12 uppercase text-center">DETAIL ORDER BUYER SULTAN</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                        <div class="lg:col-span-7 space-y-8">
+                            <div class="form-section">
+                                <p class="text-[12px] font-black text-blue-500 uppercase mb-5 tracking-widest text-center">Akses Akun & Kontak:</p>
+                                <div class="grid grid-cols-2 gap-5 mb-5"><input type="text" id="uId" placeholder="User ID / Email Login"><input type="password" id="uPass" placeholder="Password Akun"></div>
+                                <div class="mb-5"><input type="text" id="uWa" placeholder="WhatsApp Aktif Buyer"><span class="wa-note text-center">INFO SULTAN: WA WAJIB AKTIF DAN BENAR UNTUK KIRIM BUKTI SS HASIL AKHIR KE CHIEF!</span></div>
+                                <p class="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-widest text-center">Login Via:</p>
+                                <div id="logOpt" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4"></div>
                             </div>
-                            <div id="baseExtras" class="hidden space-y-3">
-                                <input type="text" id="baseName" placeholder="Nama Base (cth: Base Utama AIC)..." class="w-full p-4 rounded-xl font-bold italic text-left">
-                                <div class="grid grid-cols-2 gap-3">
-                                    <input type="text" id="lvlAIC" placeholder="Lvl AIC Inti..." class="p-4 rounded-xl font-bold italic">
-                                    <input type="text" id="lvlBus" placeholder="Lvl Bus Depot..." class="p-4 rounded-xl font-bold italic">
+
+                            <div id="efSpec" class="hidden form-section">
+                                <p class="text-[12px] font-black text-blue-500 uppercase mb-5 tracking-widest text-center">Detail Joki Sultan:</p>
+                                <div id="dynamicFields" class="space-y-5"></div>
+                                <div id="calcSection" class="hidden space-y-6 mt-6">
+                                    <div class="grid grid-cols-2 gap-8">
+                                        <div class="space-y-3 text-center">
+                                            <p class="text-[11px] font-bold text-gray-500 uppercase">Sekarang:</p>
+                                            <select id="startRank" onchange="updTot()"></select>
+                                            <input type="number" id="startStar" placeholder="Input Bintang/Poin" value="0" min="0" oninput="updTot()">
+                                        </div>
+                                        <div class="space-y-3 text-center">
+                                            <p class="text-[11px] font-bold text-gray-500 uppercase">Target:</p>
+                                            <select id="endRank" onchange="updTot()"></select>
+                                            <input type="number" id="endStar" placeholder="Input Bintang/Poin" value="0" min="0" oninput="updTot()">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="p-4 bg-gray-800/30 rounded-2xl border border-gray-700">
-                                <p class="text-[9px] font-black text-blue-500 uppercase mb-3 leading-none text-left">Login Akun Via:</p>
-                                <div id="loginOptions" class="grid grid-cols-3 gap-2"></div>
-                            </div>
-                            <input type="text" id="uId" placeholder="User ID / Email Login..." class="w-full p-4 rounded-xl font-bold italic text-left">
-                            <input type="password" id="uPass" placeholder="Password Akun..." class="w-full p-4 rounded-xl font-bold italic text-left">
-                            <div class="space-y-1">
-                                <input type="text" id="uWa" placeholder="Nomor WhatsApp Aktif..." class="w-full p-4 rounded-xl font-bold italic text-left">
-                                <p class="text-[8px] text-gray-500 font-bold italic pl-2 leading-tight text-left">
-                                    *nomor ini untuk konfirmasi pesanan<br>
-                                    *nomor ini untuk jika ada kendala
-                                </p>
                             </div>
                         </div>
 
-                        <div class="space-y-6 text-left">
-                            <div class="p-4 bg-gray-800/30 rounded-2xl border border-gray-700">
-                                <p class="text-[9px] font-black text-blue-500 uppercase mb-3 tracking-widest leading-none text-left">METODE PEMBAYARAN:</p>
-                                <div class="grid grid-cols-3 gap-2 text-[9px] font-black uppercase">
-                                    <div onclick="setPay(this, 'QRIS')" class="pay-opt glass-card p-3 rounded-xl text-center">QRIS</div>
-                                    <div onclick="setPay(this, 'DANA')" class="pay-opt glass-card p-3 rounded-xl text-center">DANA</div>
-                                    <div onclick="setPay(this, 'OVO')" class="pay-opt glass-card p-3 rounded-xl text-center">OVO</div>
+                        <div class="lg:col-span-5 space-y-8">
+                            <div class="form-section">
+                                <p class="text-[12px] font-black text-blue-500 uppercase mb-5 tracking-widest text-center">Metode Pembayaran:</p>
+                                <div id="payOpt" class="grid grid-cols-2 gap-3 mb-6"></div>
+                                <div id="qtyBox" class="flex items-center gap-5 bg-blue-500/5 p-5 rounded-xl border border-blue-500/20">
+                                    <span class="text-[12px] font-black text-gray-400 uppercase">Jumlah:</span>
+                                    <input type="number" id="uQty" value="1" min="1" oninput="updTot()" class="!w-24 text-center">
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <p class="text-[9px] text-gray-500 font-bold uppercase italic mb-1 tracking-tighter text-right">TOTAL BAYAR:</p>
-                                <p id="totalPrice" class="text-3xl font-black italic text-blue-500 leading-none text-right">Rp 0</p>
+                            <div class="form-section border-blue-500/40">
+                                <div class="flex justify-between items-end mb-8">
+                                    <p class="text-[12px] font-black text-gray-500 uppercase italic">Tagihan:</p>
+                                    <p id="totalPrice" class="text-5xl font-black italic text-blue-500 leading-none">Rp 0</p>
+                                </div>
+                                <button onclick="openCheckoutModal()" id="btnCheckout" class="w-full gaming-gradient py-7 rounded-2xl font-black italic shadow-2xl uppercase tracking-widest text-2xl transform active:scale-95 transition">GAS JOKI SEKARANG</button>
                             </div>
-                            <button onclick="prosesCheckout()" class="w-full gaming-gradient py-6 rounded-3xl font-black italic tracking-widest shadow-xl hover:scale-105 transition uppercase">KONFIRMASI JOKI SEKARANG</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <footer class="mt-20 border-t-4 border-blue-500 pt-10 pb-10 text-left">
-                <div class="flex flex-col md:flex-row justify-between gap-10">
-                    <div class="max-w-md text-left">
-                        <h3 class="text-blue-500 font-black italic mb-4 uppercase text-sm tracking-widest leading-none text-left">MaRi Gaming Store</h3>
-                        <p class="text-[11px] text-gray-400 italic font-bold leading-relaxed text-left">"MaRi Gaming Store, MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</p>
-                        <div class="flex gap-4 mt-6">
-                            <a href="https://www.tiktok.com/@mari.gaming.store" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-tiktok text-lg"></i></a>
-                            <a href="https://www.instagram.com/marigamingstore/" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-instagram text-lg"></i></a>
-                        </div>
+            <footer class="mt-40 border-t-4 border-blue-500 pt-24 pb-24 text-left px-8 bg-[#0d1117]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-24 mb-20">
+                    <div class="text-left">
+                        <div class="flex items-center gap-6 mb-12"><img src="logo.png" class="w-24 h-24 object-contain"><h3 class="text-blue-500 font-black italic uppercase text-4xl tracking-tighter">MaRi GAMING STORE</h3></div>
+                        <p id="footerDesc" class="text-[16px] text-gray-300 font-black leading-relaxed uppercase mb-12 text-justify"></p>
                     </div>
-                    <div>
-                        <h4 class="text-white font-bold text-[10px] mb-4 uppercase border-b border-gray-800 pb-2 text-left">Support</h4>
-                        <p onclick="window.open('https://wa.me/0895320302320')" class="text-[10px] text-gray-500 font-bold italic cursor-pointer hover:text-blue-500 transition text-left">Konsultasi Admin</p>
+                    <div class="md:text-right">
+                        <h4 class="text-white font-black italic text-sm mb-14 border-b-2 border-blue-500 pb-4 inline-block uppercase tracking-widest">Markas Links</h4>
+                        <ul class="space-y-10 text-[22px] font-black italic text-gray-400 uppercase tracking-tighter">
+                            <li><a href="#" onclick="location.reload()" class="hover:text-blue-500 transition">🏠 BERANDA UTAMA</a></li>
+                            <li><a href="https://wa.me/62895320302320" target="_blank" class="hover:text-blue-500 transition">🛡️ HUBUNGI ADMIN</a></li>
+                        </ul>
                     </div>
                 </div>
-                <p class="mt-10 text-center text-[9px] text-gray-700 font-black uppercase italic tracking-widest mt-10">&copy; 2026 MaRi Gaming Store. All Rights Reserved.</p>
+                <div class="pt-20 border-t border-gray-800 text-center">
+                    <p class="text-[14px] text-gray-600 font-black uppercase italic tracking-[0.5em] mb-4">"MaRi Gaming Store, MaRi Kita Joki, Akun Jadi Elit, Lu Tinggal Ngupi, MaRI Beresin Tanpa Keki"</p>
+                    <p class="text-[11px] text-gray-700 font-black uppercase italic tracking-[0.5em]">&copy; 2026 MaRi GAMING STORE</p>
+                </div>
             </footer>
         </div>
     </main>
 
-    <div id="modalPay" class="fixed inset-0 bg-[#0d1117]/98 hidden flex items-center justify-center p-6 z-[200] backdrop-blur-2xl overflow-y-auto text-center">
-        <div class="bg-[#161b22] p-10 rounded-[3rem] w-full max-w-sm border border-gray-800 shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
-            <div id="payView">
-                <h3 class="font-black italic text-xl mb-4 text-blue-500 uppercase tracking-tighter text-center">PEMBAYARAN</h3>
-                <div class="bg-gray-800/40 p-5 rounded-2xl mb-6 text-left border border-gray-700 text-left"><div id="bankDetail" class="font-black italic text-sm text-blue-400 text-left"></div></div>
-                <div id="qrisContainer" class="hidden mb-6"><img src="qris.png" class="mx-auto w-48 h-48 rounded-xl border border-white/10 p-2 bg-white"></div>
-                
-                <div class="mb-6">
-                    <label for="proofFile" class="file-upload-label">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span id="fileNameLabel" class="text-[9px] font-black uppercase">Upload Bukti Transfer</span>
-                    </label>
-                    <input type="file" id="proofFile" class="hidden" accept="image/*" onchange="validateProof(this)">
+    <div id="modalPay" class="fixed inset-0 bg-[#0d1117]/98 hidden flex items-center justify-center p-6 z-[200] backdrop-blur-3xl text-center">
+        <div class="bg-[#161b22] p-12 rounded-[4rem] w-full max-w-md border-2 border-gray-800 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-10 right-12 text-gray-500 text-4xl"><i class="fa-solid fa-xmark"></i></button>
+            <div id="payStep">
+                <h3 class="font-black italic text-3xl mb-8 text-blue-500 uppercase tracking-tighter">TRANSFER DANA</h3>
+                <div id="qrisContainer" class="hidden mb-8 text-center"><div class="qris-wrapper"><img src="qris.png" alt="QRIS" class="qris-img mx-auto"></div><p class="text-[11px] font-bold text-gray-400 mt-6 uppercase tracking-widest">Scan QR Diatas Untuk Bayar</p></div>
+                <div id="bankDetail" class="bg-blue-500/5 p-8 rounded-[2.5rem] mb-8 font-black italic text-[16px] text-blue-400 border-2 border-blue-500/10 text-left leading-relaxed"></div>
+                <div class="mb-8 text-left"><p class="text-[11px] font-black text-gray-400 uppercase mb-4 tracking-widest">Upload Bukti Transaksi (Wajib):</p><input type="file" id="uProof" class="!bg-gray-800/50 !p-5 cursor-pointer" accept="image/*"></div>
+                <button onclick="processApiGatewayOrder()" id="btnSubmitOrder" class="w-full gaming-gradient py-7 rounded-2xl font-black italic uppercase shadow-xl text-xl flex items-center justify-center gap-4"><span id="btnText">SAYA SUDAH TRANSFER</span><i id="btnLoading" class="fa-solid fa-circle-notch fa-spin hidden"></i></button>
+            </div>
+            <div id="invoiceStep" class="hidden text-left">
+                <div id="invoiceBox">
+                    <p class="text-center font-black text-2xl mb-1 italic uppercase">MaRi GAMING STORE</p>
+                    <p class="text-center border-b border-black pb-3 mb-6 text-[10px]">OFFICIAL RECEIPT #<span id="invIdDisp"></span></p>
+                    <div id="invRows" class="space-y-2"></div>
+                    <div class="inv-row" style="font-size:16px; border-top: 3px solid black; margin-top:8px; padding-top:8px; color:#2563eb;"><span>TOTAL</span> <span id="invTot"></span></div>
                 </div>
-                <button onclick="kirimOrderKeServer()" id="btnSubmitOrder" class="w-full bg-gray-700 text-gray-500 py-4 rounded-2xl font-black italic uppercase tracking-widest" disabled style="cursor: not-allowed;">UPLOAD BUKTI DULU</button>
-            </div>
-            <div id="successView" class="hidden text-center">
-                <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)]"><i class="fa-solid fa-check text-4xl text-center"></i></div>
-                <h3 class="font-black italic text-xl mb-2 text-white uppercase tracking-tighter text-center">ORDERAN MENDARAT!</h3>
-                <div id="invoiceBox" class="bg-black/30 p-4 rounded-2xl text-left border border-gray-800 text-[10px] font-mono text-blue-400 space-y-1 mb-8 whitespace-pre leading-tight overflow-x-auto text-left"></div>
-                <p class="text-[9px] text-gray-500 italic uppercase font-black mb-6 text-center leading-tight">Data login & laporan joki telah dikirim otomatis ke WhatsApp Admin Markas!</p>
-                <button onclick="location.reload()" class="w-full bg-gray-800 py-4 rounded-2xl font-black italic uppercase border border-gray-700 hover:text-blue-500 transition tracking-widest text-center">KEMBALI KE HOME</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalAuth" class="fixed inset-0 bg-[#0d1117]/98 hidden flex items-center justify-center p-6 z-[250] backdrop-blur-2xl text-center">
-        <div class="bg-[#161b22] p-10 rounded-[3rem] w-full max-w-sm border border-gray-800 relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-6 right-8 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
-            <div id="loginForm" class="hidden space-y-5">
-                <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center">LOGIN CHIEF</h3>
-                <input type="email" id="logEmail" placeholder="Email Akun..." class="w-full p-5 rounded-2xl font-bold italic">
-                <input type="password" id="logPass" placeholder="Password..." class="w-full p-5 rounded-2xl font-bold italic">
-                <button onclick="handleAuth('login')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">MASUK MARKAS</button>
-            </div>
-            <div id="registerForm" class="hidden space-y-5">
-                <h3 class="font-black italic text-2xl text-blue-500 uppercase tracking-tighter leading-none text-center text-center">DAFTAR AKUN</h3>
-                <input type="email" id="regEmail" placeholder="Email Baru..." class="w-full p-5 rounded-2xl font-bold italic">
-                <input type="password" id="regPass" placeholder="Password Baru..." class="w-full p-5 rounded-2xl font-bold italic">
-                <button onclick="handleAuth('register')" class="w-full gaming-gradient py-5 rounded-2xl font-black italic uppercase shadow-lg tracking-widest text-center">GABUNG SEKARANG</button>
+                <p class="mt-8 p-6 bg-blue-500/10 border border-blue-500/30 rounded-2xl text-center text-[11px] text-blue-400 font-black italic uppercase">DATA ORDER TERKIRIM KE MARKAS CHIEF!</p>
             </div>
         </div>
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-        const firebaseConfig = { apiKey: "AIzaSyCIJcB6vjFyA-0-s8CmMYp_92CjsRy5Un0", authDomain: "mari-gaming-store.firebaseapp.com", projectId: "mari-gaming-store", storageBucket: "mari-gaming-store.firebasestorage.app", messagingSenderId: "603917576692", appId: "1:603917576692:web:17b748327b4377f5d831a1", measurementId: "G-6PWBTZ414Z" };
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        window.notify = (msg, color = "#1d4ed8") => {
-            const t = document.getElementById("toast");
-            t.style.borderLeft = `5px solid ${color}`; t.innerText = msg; t.classList.add("show");
-            setTimeout(() => t.classList.remove("show"), 3000);
-        };
-
-        window.loginGoogle = async () => { try { await signInWithPopup(auth, provider); notify("Login Sukses!", "#22c55e"); } catch(e) { notify("Error Login!"); } };
-        window.handleAuth = async (type) => {
-            const email = type === 'register' ? document.getElementById('regEmail').value : document.getElementById('logEmail').value;
-            const pass = type === 'register' ? document.getElementById('regPass').value : document.getElementById('logPass').value;
-            try {
-                if (type === 'register') await createUserWithEmailAndPassword(auth, email, pass);
-                else await signInWithEmailAndPassword(auth, email, pass);
-                notify("Sukses Chief!", "#22c55e"); closeAuthModal();
-            } catch (error) { notify("Email/Pass Salah!", "#ef4444"); }
-        };
-
-        window.logout = () => signOut(auth);
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById('authButtons').classList.add('hidden');
-                document.getElementById('userProfile').classList.remove('hidden');
-                document.getElementById('profileName').innerText = (user.displayName || user.email).toUpperCase();
-            } else {
-                document.getElementById('authButtons').classList.remove('hidden');
-                document.getElementById('userProfile').classList.add('hidden');
-            }
-        });
-    </script>
-
-    <script>
-        const paymentAccounts = { 'QRIS': 'SCAN KODE QR DI BAWAH CHIEF!', 'DANA': 'DANA: 0895-3203-02320 (A/N RIDWAN)', 'OVO': 'OVO: 0851-5690-6427 (A/N RIDWAN)' };
-        
-        const gameData = {
-            mlbb: { banner: "ml_logo.png", pkgs: [
-                { n: "Joki Master (Per ⭐)", p: 2000, d: "Layanan pengerjaan rank Master cepat. Winrate aman Chief. Hero pool luas." },
-                { n: "Joki Grandmaster (Per ⭐)", p: 3000, d: "Beresin rank GM tanpa keki. Cocok buat naik ke Epic." },
-                { n: "Joki Epic (Per ⭐)", p: 5000, d: "Layanan joki tier badak secepat kilat. Pro joki only." },
-                { n: "Joki Legend (Per ⭐)", p: 7000, d: "Otw Mythic lancar jaya. Hero pool luas menyesuaikan meta terbaru." },
-                { n: "Joki Mythic (Per ⭐)", p: 15000, d: "Rank kasta tinggi pengerjaan elit tervalidasi." }
-            ], logins: ["MOONTON", "GOOGLE", "FB"]},
-            endfield: { banner: "endfield_logo.png", pkgs: [
-                { n: "Tier 1 (Rafinasi)", p: 5000, d: "Khusus setting 1 jenis produksi material awal (Rafinasi). Bukan 1 base utuh Chief.", type: 'base' },
-                { n: "Tier 2 (Conveyor)", p: 10000, d: "Pembuatan jalur conveyor otomatis sederhana untuk 1 jenis material dasar.", type: 'base' },
-                { n: "Tier 3 (Optimization)", p: 35000, d: "Re-layout total jalur produksi yang berantakan agar workflow lancar.", type: 'base' },
-                { n: "Tier 4 (Professional)", p: 50000, d: "Integrasi logistik otomatis skala menengah.", type: 'base' },
-                { n: "Tier End (God Tier)", p: 100000, d: "Setting 6 Jalur Logistik maksimal. Produksi super cepat & efisiensi 100%.", type: 'base' },
-                { n: "Per Chapter (Story)", p: 20000, d: "Clear misi utama per chapter pilihan Chief." },
-                { n: "Paket Story (Ch 1-3)", p: 120000, d: "Akselerasi story tamat Chapter 3. Progres cepat." },
-                { n: "Full Map Exploration", p: 125000, d: "Unlock Kabut, Beacon, & Teleport di area yang tersedia." },
-                { n: "Daily Farm (7 Hari)", p: 80000, d: "Jasa harian selama 7 hari (Login, Clear Daily, Kuras Stamina)." },
-                { n: "Starter Siap Tempur", p: 300000, d: "Story Ch 1-3 Tamat + Full Map Dasar + Base Tier 2." },
-                { n: "Pro-Farmer Setup", p: 500000, d: "Story Ch 1-5 Tamat + Full Map + Base Tier 4." },
-                { n: "Akun Elit (End-Game)", p: 850000, d: "Full Story & Map + Setup Tower 6 Jalur + Bonus Maintenance." },
-                { n: "The Hub Map (Sultan)", p: 1377000, d: "Full Service eksplorasi map The Hub secara menyeluruh skala internasional. Clear 100%." },
-                { n: "Valley IV (Sultan)", p: 1836000, d: "Full Progress khusus area Valley IV dengan standar pengerjaan tinggi." },
-                { n: "End-Game Integration", p: 2500000, d: "Setup base end-game paling kompleks Sultan. Integrasi seluruh sistem otomatis total." }
-            ], logins: ["GOOGLE", "GRYPHLINE", "EMAIL"]}
-        };
-
-        let curG, curP, curPr, curL, curPy, curT, globalTrk;
-
-        function goToStep2(game) { 
-            curG = game; 
-            document.getElementById('step1').classList.add('hidden'); 
-            document.getElementById('step2').classList.remove('hidden');
-            document.getElementById('gameBannerTop').src = gameData[game].banner; 
-            render(); 
-        }
-
-        function render() {
-            const data = gameData[curG];
-            document.getElementById('pkgGrid').innerHTML = data.pkgs.map(p => `<div onclick="selectPkg(this, '${p.n}', ${p.p}, '${p.type}')" class="glass-card p-5 rounded-[1.5rem] flex flex-col justify-between"><p class="font-black italic text-[10px] text-white uppercase leading-none mb-1 text-left">${p.n}</p><p class="text-blue-500 font-black italic text-[11px] leading-none mb-2 text-left">Rp ${p.p.toLocaleString()}</p><div class="desc-inline"><p class="desc-text">${p.d}</p></div></div>`).join('');
-            document.getElementById('loginOptions').innerHTML = data.logins.map(l => `<div onclick="setL(this, '${l}')" class="l-opt glass-card p-2 rounded-xl text-[9px] font-bold text-center uppercase">${l}</div>`).join('');
-        }
-
-        function selectPkg(el, n, p, type) { 
-            curP = n; curPr = p; curT = type;
-            document.querySelectorAll('#pkgGrid > div').forEach(div => div.classList.remove('selected-item')); 
-            el.classList.add('selected-item'); 
-            document.getElementById('totalPrice').innerText = `Rp ${p.toLocaleString()}`; 
-            document.getElementById('formData').classList.remove('hidden'); 
-            document.getElementById('endfieldExtras').classList.toggle('hidden', curG !== 'endfield'); 
-            document.getElementById('baseExtras').classList.toggle('hidden', !(curG === 'endfield' && type === 'base'));
-        }
-
-        function validateProof(input) {
-            const btn = document.getElementById('btnSubmitOrder');
-            const label = document.getElementById('fileNameLabel');
-            if (input.files && input.files[0]) {
-                label.innerText = "BUKTI SIAP: " + input.files[0].name.substring(0, 15) + "...";
-                btn.disabled = false;
-                btn.innerText = "SAYA SUDAH BAYAR";
-                btn.classList.add('gaming-gradient');
-                btn.style.color = "white";
-                btn.style.cursor = "pointer";
-            }
-        }
-
-        function setL(el, type) { curL = type; document.querySelectorAll('.l-opt').forEach(t => t.classList.remove('selected-item')); el.classList.add('selected-item'); }
-        function setPay(el, m) { curPy = m; document.querySelectorAll('.pay-opt').forEach(c => c.classList.remove('selected-item')); el.classList.add('selected-item'); document.getElementById('bankDetail').innerText = paymentAccounts[m]; document.getElementById('qrisContainer').classList.toggle('hidden', m !== 'QRIS'); }
-        function openAuthModal(t) { document.getElementById('modalAuth').classList.remove('hidden'); document.getElementById('loginForm').classList.toggle('hidden', t !== 'login'); document.getElementById('registerForm').classList.toggle('hidden', t !== 'register'); }
-        function closeAuthModal() { document.getElementById('modalAuth').classList.add('hidden'); }
-        function closeModal() { document.getElementById('modalPay').classList.add('hidden'); }
-        function backToStep1() { location.reload(); }
-        function prosesCheckout() { if(!curP || !curPy || !document.getElementById('uWa').value) return notify('Lengkapi Data!', '#ef4444'); document.getElementById('modalPay').classList.remove('hidden'); }
-        
-        async function kirimOrderKeServer() {
-            globalTrk = 'MARI-' + Math.floor(Math.random()*99999);
-            const uId = document.getElementById('uId').value;
-            const uPass = document.getElementById('uPass').value;
-            const uWa = document.getElementById('uWa').value;
-            const explo = document.getElementById('lvlExplo').value || '-';
-            const otor = document.getElementById('lvlOto').value || '-';
-            const base = document.getElementById('baseName').value || '-';
-            const aic = document.getElementById('lvlAIC').value || '-';
-
-            let msg = `*ORDERAN JOKI BARU - MaRi STORE*\n\n`;
-            msg += `ID: ${globalTrk}\n`;
-            msg += `Game: ${curG.toUpperCase()}\n`;
-            msg += `Paket: ${curP}\n`;
-            msg += `Total: Rp ${curPr.toLocaleString()}\n`;
-            msg += `Pay: ${curPy}\n\n`;
-            msg += `*--- DATA AKUN ---*\n`;
-            msg += `Login: ${curL}\n`;
-            msg += `User: ${uId}\n`;
-            msg += `Pass: ${uPass}\n`;
-            msg += `WA Buyer: ${uWa}\n\n`;
-            if(curG === 'endfield') {
-                msg += `*--- DETAIL ENDFIELD ---*\n`;
-                msg += `Explo/Oto: ${explo}/${otor}\n`;
-                msg += `Base: ${base} (${aic})\n\n`;
-            }
-            msg += `_MaRi Gaming Store_`;
-
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", "FZntVMqyjtucpyaYumad");
-
-            var formdata = new FormData();
-            formdata.append("target", "085156906427"); 
-            formdata.append("message", msg);
-
-            var requestOptions = {
-              method: 'POST',
-              headers: myHeaders,
-              body: formdata,
-              redirect: 'follow'
-            };
-
-            fetch("https://api.fonnte.com/send", requestOptions)
-              .then(response => response.text())
-              .then(result => {
-                  console.log(result);
-                  notify("Laporan Terkirim!", "#22c55e");
-              })
-              .catch(error => {
-                  console.log('error', error);
-                  notify("Gagal Kirim Laporan!", "#ef4444");
-              });
-
-            const invoiceText = `-------------------------\nMA-RI STORE INVOICE\n-------------------------\nTRK ID: ${globalTrk}\nGAME  : ${curG.toUpperCase()}\nPKT   : ${curP}\nTOT   : Rp ${curPr.toLocaleString()}\nWA    : ${uWa}\nSTATUS: TERKIRIM KE ADMIN`;
-            document.getElementById('invoiceBox').innerText = invoiceText;
-            document.getElementById('payView').classList.add('hidden');
-            document.getElementById('successView').classList.remove('hidden');
-        }
-    </script>
-</body>
-</html>
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/
